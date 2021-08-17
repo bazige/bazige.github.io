@@ -1,10 +1,14 @@
-# 1 ascendfly
+[TOC]
 
-## 1.1 背景
+![](./ascend/logo/ascendfly.png)
+
+## 1 简介
+
+### 1.1 背景
 
 该项目通过Ascend Compute Language Python(pyACL) API实现Ascendfly推理框架，封装了一系列易用的python接口，目的是简化用户使用pyACL开发流程，加速算法迁移部署。以下对ascendfly相关接口功能、依赖安装和使用进行简要说明。
 
-## 1.2 主要功能
+### 1.2 主要功能
 
 本软件提供以下功能：
 
@@ -16,7 +20,7 @@
 6. 封装了Profiling类，方便进行模型性能调优。
 7. 其它如单算子调用，后处理等功能。
 
-## 1.3 程序架构
+### 1.3 程序架构
 
 Ascendfly系统级封装主要包括以下模块（module）。
 
@@ -51,15 +55,15 @@ Ascendfly系统级封装主要包括以下模块（module）。
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0222/151913_6ad4c066_8307159.jpeg "system.jpg")
 
-## 1.4 设计流程
+### 1.4 设计流程
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0222/151932_3604f1a3_8307159.jpeg "thread.jpg")
 
 
 
-# 2 环境依赖及安装指导
+## 2 环境依赖及安装指导
 
-## 2.1 环境依赖
+### 2.1 环境依赖
 
 ascendfly需要依赖**pyACL（CANN 21.0.1及以上）**、[**pyav**](https://github.com/PyAV-Org/PyAV)和[**PIL**]()。以下简要介绍相关依赖软件安装过程。
 
@@ -84,18 +88,18 @@ ascendfly需要依赖**pyACL（CANN 21.0.1及以上）**、[**pyav**](https://gi
 
 
 
-## 2.2 CANN安装
+### 2.2 CANN安装
 
 pyACL作为ACL python API编程接口，开放context创建、内存申请、模型和算子等功能，ascendfly推理框架依赖pyACL提供的API。具体环境安装方法参考[《CANN 软件安装指南》](https://support.huaweicloud.com/instg-cli-cann/atlascli_03_0001.html), 安装CANN后，进行[环境变量配置](https://support.huaweicloud.com/asdevg-python-cann/atlaspython_01_0006.html)。
 
-## 2.2 Ascendfly安装
+### 2.3 Ascendfly安装
 ascendfly会自动安装相关依赖，无需另外操作，通过以下命令直接安装
 
 ```shell
 pip install ascendfly
 ```
 
-## 2.3 opencv安装过程（可选）
+### 2.4 opencv安装过程（可选）
 
 如果是ARM平台，编译安装opencv-python前需要先安装python3.7.5
 
@@ -111,9 +115,9 @@ pip install ascendfly
 
    python3.7.5 setup.py install
 
-# 3 使用指导
+## 3 使用指导
 
-## 3.1 使用约束
+### 3.1 使用约束
 
 本章节介绍Ascendfly限制约束。
 
@@ -127,11 +131,11 @@ pip install ascendfly
 
 
 
-## 3.2 使用前准备
+### 3.2 使用前准备
 
 运行前，需要先进行模型的转换和配置文件修改。模型和配置文件的存放位置可自定义。
 
-### 3.2.1 模型准备
+#### 3.2.1 模型准备
 
 - **步骤 1 :** 模型下载
 
@@ -142,11 +146,11 @@ pip install ascendfly
 
   请参考[ATC工具参数说明](https://support.huaweicloud.com/tg-Inference-cann/atlasatc_16_0007.html)进行aipp配置，以及把caffe、TensorFlow或onnx模型转换为ascend平台om模型（可参考tools/convert脚本）。
 
-### 3.2.2 利用ascendfly API进行开发
+#### 3.2.2 利用ascendfly API进行开发
 
-可参考demo中样例和[API使用手册](./ascend/index.html)，利用ascendfly API进行推理流程开发。
+可参考demo中样例和[API使用手册](#4.1)，利用ascendfly API进行推理流程开发。
 
-## 3.3 demo运行
+### 3.3 demo运行
 
 进入demo目录下，对要运行demo的device id和video_stream_path等配置进行修改，运行测试demo
 
@@ -156,6 +160,6 @@ python3.7.5 yolov3_caffe_demo.py
 
    
 
-# 4 附录
-## 4.1 Ascendfly API
-请参考[链接](./ascend/index.html)或[源码](https://gitee.com/ascend-fae/ascendfly) doc目录index.html文件。
+## 4 附录
+### 4.1 Ascendfly API
+请参考[API doc](./ascend/index.html)。
