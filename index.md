@@ -1,4 +1,4 @@
-# 1 简介
+# 1 ascendfly
 
 ## 1.1 背景
 
@@ -144,7 +144,7 @@ pip install ascendfly
 
 ### 3.2.2 利用ascendfly API进行开发
 
-可参考demo中样例和[API使用手册](#4.1)，利用ascendfly API进行推理流程开发。
+可参考demo中样例和[API使用手册](./ascend/index.html)，利用ascendfly API进行推理流程开发。
 
 ## 3.3 demo运行
 
