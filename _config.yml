@@ -13,18 +13,3 @@ nav:
 - name:     "Github"
   url:      "https://github.com/bazige/ascendfly"
   
-  # Scopes
-defaults:
--
-  scope:
-    path:         ""
-    type:         "pages"
-  values:
-    layout:       "page"
--
-  scope:
-    path:         ""
-    type:         "posts"
-  values:
-    layout:       "post"
-  
