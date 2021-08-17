@@ -1,5 +1,3 @@
-[TOC]
-
 # 1 简介
 
 ## 1.1 背景
@@ -160,4 +158,4 @@ python3.7.5 yolov3_caffe_demo.py
 
 # 4 附录
 ## 4.1 Ascendfly API
-请参考[源码](https://gitee.com/ascend-fae/ascendfly) doc目录index.html文件。
+请参考[链接](./ascend/index.html)或[源码](https://gitee.com/ascend-fae/ascendfly) doc目录index.html文件。
