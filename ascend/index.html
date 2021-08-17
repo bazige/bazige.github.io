@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.9.2" />
 <title>ascend API documentation</title>
-<meta name="description" content="[TOC] …" />
+<meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -21,8 +21,8 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
 <script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
 <style>.homelink{display:block;font-size:2em;font-weight:bold;color:#555;padding-bottom:.5em;border-bottom:1px solid silver}.homelink:hover{color:inherit}.homelink img{max-width:20%;max-height:5em;margin:auto;margin-bottom:.3em}</style>
-<link rel="canonical" href="https://pdoc3.github.io/pdoc/doc/ascend/">
-<link rel="icon" href="https://gitee.com/ascend-fae/ascendfly/blob/master/doc/logo/logo.png">
+<link rel="canonical" href="https://bazige.github.io/ascend/">
+<link rel="icon" href="https://bazige.github.io/ascend/logo/logo.png"">
 </head>
 <body>
 <main>
@@ -31,233 +31,13 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <h1 class="title">Package <code>ascend</code></h1>
 </header>
 <section id="section-intro">
-<div class="toc">
-<ul>
-<li><a href="#1">1 简介</a><ul>
-<li><a href="#11">1.1 背景</a></li>
-<li><a href="#12">1.2 主要功能</a></li>
-<li><a href="#13">1.3 程序架构</a></li>
-<li><a href="#14">1.4 设计流程</a></li>
-</ul>
-</li>
-<li><a href="#2">2 环境依赖及安装指导</a><ul>
-<li><a href="#21">2.1 环境依赖</a></li>
-<li><a href="#22-cann">2.2 CANN安装</a></li>
-<li><a href="#22-ascendfly">2.2 Ascendfly安装</a></li>
-<li><a href="#23-opencv">2.3 opencv安装过程（可选）</a></li>
-</ul>
-</li>
-<li><a href="#3">3 使用指导</a><ul>
-<li><a href="#31">3.1 使用约束</a></li>
-<li><a href="#32">3.2 使用前准备</a><ul>
-<li><a href="#321">3.2.1 模型准备</a></li>
-<li><a href="#322-ascendfly-api">3.2.2 利用ascendfly API进行开发</a></li>
-</ul>
-</li>
-<li><a href="#33-demo">3.3 demo运行</a></li>
-</ul>
-</li>
-<li><a href="#4">4 附录</a><ul>
-<li><a href="#41-ascendfly-api">4.1 Ascendfly API</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<h1 id="1">1 简介</h1>
-<h2 id="11">1.1 背景</h2>
-<p>该项目通过Ascend Compute Language Python(pyACL) API实现Ascendfly推理框架，封装了一系列易用的python接口，目的是简化用户使用pyACL开发流程，加速算法迁移部署。以下对ascendfly相关接口功能、依赖安装和使用进行简要说明。</p>
-<h2 id="12">1.2 主要功能</h2>
-<p>本软件提供以下功能：</p>
-<ol>
-<li>封装了Context、Memory资源类，简化资源调度与分配。</li>
-<li>封装了AscendArray类，类似numpy.ndrray在device上进行图片和tensor管理，实现数据统一性。AscendArray自动管理数据内存，无需用户操作。</li>
-<li>封装了VideoCapture和VideoWriter类，获取实时H264（MAIN LEVEL without B frame）协议的RTSP/RTMP码流，并通过Ascend310芯片硬解码，或逐帧把图片编码为264/265码流。</li>
-<li>封装了Image类，实现图片解码、缩放、剪切、padding等图像处理功能。</li>
-<li>封装了Model类执行模型推理功能。</li>
-<li>封装了Profiling类，方便进行模型性能调优。</li>
-<li>其它如单算子调用，后处理等功能。</li>
-</ol>
-<h2 id="13">1.3 程序架构</h2>
-<p>Ascendfly系统级封装主要包括以下模块（module）。</p>
-<ol>
-<li>资源管理（resource）:</li>
-</ol>
-<p>resource包括内存模块（mem）、context和线程/进程资源（thread/multi-process）。mem主要是Memory对象，进行内存申请和释放；context主要实现Context资源申请和释放等；multiprocess主要做并行加速。</p>
-<ol>
-<li>数据模块（data）：</li>
-</ol>
-<p>主要包括ascendarray和tensor，ascendarray实现类似numpy.ndarray的AscendArray对象，<strong>完成整个框架图像、tensor数据的统一性</strong>，并具备不同于ndarray的to_numpy、to_ascend、clone方法实现numpy.ndarray数据和对象的复制。tensor主要实现imgs2tensor和tensor2imgs两个函数的功能，完成3维图片和4维tensor的转换，用于组batch进行推理或tensor heatmap显示。</p>
-<ol>
-<li>
-<p>模型（model）：
-model模块封装了AscendModel，用来进行模型推理。模型实例化后，通过model.tensor获取输入输出tensor name，通过feed_data方法给模型数据，通过run方法实现推理，通过get_tensor_by_name获取输出tensor数据。</p>
-</li>
-<li>
-<p>图像模块（image）：</p>
-</li>
-</ol>
-<p>涉及到图像预处理（动态aipp），图像色域空间转换（colorspace），图像几何变换（geome）和图像显示（misc）。</p>
-<ol>
-<li>
-<p>视频模块（video)：
-video模块封装了VideoCapture类用于H264/H265 RTSP/RTMP视频解码，使用方式基本与opencv VideoCapture基本一致，实现方式是通过pyav进行拉流解包，vdec（封装了dvpp解码功能）进行解码。video模块还封装了VideoWriter类，用于把单帧yuv图像编码成H264/265的实时视频流，使用方式与opencv VideoWriter有轻微差别，实现方式是把AscendArray的单帧图像数据通过venc（封装了dvpp编码功能）进行编码，保存视频流到本地。</p>
-</li>
-<li>
-<p>后处理（post_process)：
-后处理部分实现了bbox_overlaps函数用于计算bbox的iou，nms用于计算NonMaximumSuppression，imshow、imshow_det_bboxes等显示检测的目标框或把目标框和confidence写在图片上并保存下来。</p>
-</li>
-<li>
-<p>算子模块（ops）：
-算子部分主要实现blas库算子调用和Argmax、Cast、Transpose、FFT等算子调用。</p>
-</li>
-<li>
-<p>性能调优（profiling)：
-模块封装了Profiling类可以更简单的实现算子、模型性能调优，可以直观地显示各算子执行耗时并加以排序。</p>
-</li>
-</ol>
-<p>整体系统设计如下图所示：</p>
-<p><img alt="输入图片说明" src="https://images.gitee.com/uploads/images/2021/0222/151913_6ad4c066_8307159.jpeg" title="system.jpg"></p>
-<h2 id="14">1.4 设计流程</h2>
-<p><img alt="输入图片说明" src="https://images.gitee.com/uploads/images/2021/0222/151932_3604f1a3_8307159.jpeg" title="thread.jpg"></p>
-<h1 id="2">2 环境依赖及安装指导</h1>
-<h2 id="21">2.1 环境依赖</h2>
-<p>ascendfly需要依赖<strong>pyACL（CANN 21.0.1及以上）</strong>、<a href="https://github.com/PyAV-Org/PyAV"><strong>pyav</strong></a>和<a href=""><strong>PIL</strong></a>。以下简要介绍相关依赖软件安装过程。</p>
-<p>表2-1 环境要求</p>
-<table>
-<thead>
-<tr>
-<th>环境要求</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>硬件环境</td>
-<td>Atlas 300（型号3000 或 3010）/Atlas 800（型号3000 或 3010）</td>
-</tr>
-<tr>
-<td>操作系统</td>
-<td>CentOS 7.6/Ubuntu18.04</td>
-</tr>
-</tbody>
-</table>
-<p>表2-2 环境依赖软件及软件版本</p>
-<table>
-<thead>
-<tr>
-<th>软件名称</th>
-<th>软件版本</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>pyACL</td>
-<td>（安装CANN 21.0.1 及以上，会自带安装pyACL ）</td>
-</tr>
-<tr>
-<td>numpy</td>
-<td>&gt;=1.14</td>
-</tr>
-<tr>
-<td>pyav</td>
-<td>&gt;=8.0.2</td>
-</tr>
-<tr>
-<td>PIL</td>
-<td>&gt;=8.2.0</td>
-</tr>
-<tr>
-<td>objgraph</td>
-<td>&gt;=3.5.0</td>
-</tr>
-<tr>
-<td>prettytable</td>
-<td>&gt;=2.1.0</td>
-</tr>
-<tr>
-<td>opencv （可选）</td>
-<td>&gt;=3.4.2</td>
-</tr>
-</tbody>
-</table>
-<h2 id="22-cann">2.2 CANN安装</h2>
-<p>pyACL作为ACL python API编程接口，开放context创建、内存申请、模型和算子等功能，ascendfly推理框架依赖pyACL提供的API。具体环境安装方法参考<a href="https://support.huaweicloud.com/instg-cli-cann/atlascli_03_0001.html">《CANN 软件安装指南》</a>, 安装CANN后，进行<a href="https://support.huaweicloud.com/asdevg-python-cann/atlaspython_01_0006.html">环境变量配置</a>。</p>
-<h2 id="22-ascendfly">2.2 Ascendfly安装</h2>
-<p>ascendfly会自动安装相关依赖，无需另外操作，通过以下命令直接安装</p>
-<pre><code class="language-shell">pip install ascendfly
-</code></pre>
-<h2 id="23-opencv">2.3 opencv安装过程（可选）</h2>
-<p>如果是ARM平台，编译安装opencv-python前需要先安装python3.7.5</p>
-<ul>
-<li><strong>步骤 1</strong> 下载opencv-python</li>
-</ul>
-<p><a href="https://pypi.org/project/opencv-python/4.4.0.46/#files">https://pypi.org/project/opencv-python/4.4.0.46/#files</a></p>
-<ul>
-<li><strong>步骤 2</strong>
-解压opencv-python</li>
-</ul>
-<p>tar -zxvf opencv-python-4.4.0.46.tar.gz &amp;&amp; cd opencv-python-4.4.0.46</p>
-<ul>
-<li><strong>步骤 3</strong>
-编译opencv-python</li>
-</ul>
-<p>python3.7.5 setup.py install</p>
-<h1 id="3">3 使用指导</h1>
-<h2 id="31">3.1 使用约束</h2>
-<p>本章节介绍Ascendfly限制约束。</p>
-<p>表3-1 使用约束</p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>规格约束</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>pyACL</td>
-<td>请参考<a href="https://support.huaweicloud.com/asdevg-python-cann/atlaspython_01_0001.html">《应用开发指南(Python)》</a></td>
-</tr>
-<tr>
-<td>context</td>
-<td>context通过device id创建，每个context对应唯一device id.</td>
-</tr>
-<tr>
-<td>VideoCapture</td>
-<td>目前只支持rtsp协议，拉取H264（去除B帧）的视频流</td>
-</tr>
-</tbody>
-</table>
-<h2 id="32">3.2 使用前准备</h2>
-<p>运行前，需要先进行模型的转换和配置文件修改。模型和配置文件的存放位置可自定义。</p>
-<h3 id="321">3.2.1 模型准备</h3>
-<ul>
-<li><strong>步骤 1 :</strong> 模型下载</li>
-</ul>
-<p>首先，获取所用到的原始网络模型、权重文件和aipp_cfg文件（相关模型下载可参考tools/modelzoo链接），并将其存放到开发环境普通用户下的任意目录，例如：/home/model/</p>
-<ul>
-<li><strong>步骤 2:</strong>
-模型转换</li>
-</ul>
-<p>请参考<a href="https://support.huaweicloud.com/tg-Inference-cann/atlasatc_16_0007.html">ATC工具参数说明</a>进行aipp配置，以及把caffe、TensorFlow或onnx模型转换为ascend平台om模型（可参考tools/convert脚本）。</p>
-<h3 id="322-ascendfly-api">3.2.2 利用ascendfly API进行开发</h3>
-<p>可参考demo中样例和<a href="#4.1">API使用手册</a>，利用ascendfly API进行推理流程开发。</p>
-<h2 id="33-demo">3.3 demo运行</h2>
-<p>进入demo目录下，对要运行demo的device id和video_stream_path等配置进行修改，运行测试demo</p>
-<pre><code class="language-shell">python3.7.5 yolov3_caffe_demo.py
-</code></pre>
-<h1 id="4">4 附录</h1>
-<h2 id="41-ascendfly-api">4.1 Ascendfly API</h2>
-<p>请参考<a href="https://gitee.com/ascend-fae/ascendfly">源码</a> doc目录index.html文件。</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/__init__.py#L0-L38" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/__init__.py#L0-L36" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># -*- coding: utf-8 -*-
-&#34;&#34;&#34;
-.. include:: ../README_cn.md
-&#34;&#34;&#34;
+
 from .common import *
 from .resource import *
 from .data import *
@@ -11783,45 +11563,16 @@ def out(self):
 <nav id="sidebar">
 <header>
 <a class="homelink" rel="home" title="ascendfly Home" href="https://gitee.com/ascend-fae/ascendfly">
-<img src="https://gitee.com/ascend-fae/ascendfly/blob/master/doc/logo/logo.png" alt=""> ascendfly
+<img src="https://bazige.github.io/ascend/logo/logo.png" alt=""> ascendfly
 </a>
 </header>
 <div class="gcse-search" style="height: 70px"
-data-as_oq="site:pdoc3.github.io inurl:github.com/pdoc3"
+data-as_oq="site:bazige.github.io inurl:github.com/ascendfly"
 data-gaCategoryParameter="ascend">
 </div>
 <h1>Index</h1>
 <div class="toc">
-<ul>
-<li><a href="#1">1 简介</a><ul>
-<li><a href="#11">1.1 背景</a></li>
-<li><a href="#12">1.2 主要功能</a></li>
-<li><a href="#13">1.3 程序架构</a></li>
-<li><a href="#14">1.4 设计流程</a></li>
-</ul>
-</li>
-<li><a href="#2">2 环境依赖及安装指导</a><ul>
-<li><a href="#21">2.1 环境依赖</a></li>
-<li><a href="#22-cann">2.2 CANN安装</a></li>
-<li><a href="#22-ascendfly">2.2 Ascendfly安装</a></li>
-<li><a href="#23-opencv">2.3 opencv安装过程（可选）</a></li>
-</ul>
-</li>
-<li><a href="#3">3 使用指导</a><ul>
-<li><a href="#31">3.1 使用约束</a></li>
-<li><a href="#32">3.2 使用前准备</a><ul>
-<li><a href="#321">3.2.1 模型准备</a></li>
-<li><a href="#322-ascendfly-api">3.2.2 利用ascendfly API进行开发</a></li>
-</ul>
-</li>
-<li><a href="#33-demo">3.3 demo运行</a></li>
-</ul>
-</li>
-<li><a href="#4">4 附录</a><ul>
-<li><a href="#41-ascendfly-api">4.1 Ascendfly API</a></li>
-</ul>
-</li>
-</ul>
+<ul></ul>
 </div>
 <ul id="index">
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
