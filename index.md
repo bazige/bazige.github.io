@@ -1,6 +1,5 @@
-# Ascendfly
 ![](./ascend/logo/ascendfly.png)
-
+# Ascendfly
 ## 1 简介
 
 ### 1.1 背景
@@ -156,8 +155,6 @@ pip install ascendfly
 ```shell
 python3.7.5 yolov3_caffe_demo.py
 ```
-
-   
 
 ## 4 附录
 ### 4.1 Ascendfly API
