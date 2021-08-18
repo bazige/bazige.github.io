@@ -1,6 +1,4 @@
-[TOC]
-
-# Ascendfly
+![](./ascend/logo/ascendfly.png)
 
 ## 1 简介
 
@@ -52,9 +50,7 @@ Ascendfly系统级封装主要包括以下模块（module）。
    模块封装了Profiling类可以更简单的实现算子、模型性能调优，可以直观地显示各算子执行耗时并加以排序。
 
 整体系统设计如下图所示：
-
-![输入图片说明](./ascend/logo/ascendfly_graph.png)
-
+![](./ascend/logo/ascendfly_graph.png)
 
 
 ## 2 环境依赖及安装指导
