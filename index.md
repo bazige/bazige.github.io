@@ -1,4 +1,7 @@
-![](./ascend/logo/ascendfly.png)
+[TOC]
+
+# Ascendfly
+
 ## 1 简介
 
 ### 1.1 背景
@@ -50,11 +53,7 @@ Ascendfly系统级封装主要包括以下模块（module）。
 
 整体系统设计如下图所示：
 
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0222/151913_6ad4c066_8307159.jpeg "system.jpg")
-
-### 1.4 设计流程
-
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0222/151932_3604f1a3_8307159.jpeg "thread.jpg")
+![输入图片说明](./doc/logo/ascendfly_graph.png)
 
 
 
@@ -145,7 +144,7 @@ pip install ascendfly
 
 #### 3.2.2 利用ascendfly API进行开发
 
-可参考demo中样例和[API使用手册](#4.1)，利用ascendfly API进行推理流程开发。
+可参考demo中样例和[API使用手册](./ascend/index.html)，利用ascendfly API进行推理流程开发。
 
 ### 3.3 demo运行
 
@@ -154,6 +153,8 @@ pip install ascendfly
 ```shell
 python3.7.5 yolov3_caffe_demo.py
 ```
+
+   
 
 ## 4 附录
 ### 4.1 Ascendfly API
