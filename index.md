@@ -53,7 +53,7 @@ Ascendfly系统级封装主要包括以下模块（module）。
 
 整体系统设计如下图所示：
 
-![输入图片说明](./doc/logo/ascendfly_graph.png)
+![输入图片说明](./ascend/logo/ascendfly_graph.png)
 
 
 
