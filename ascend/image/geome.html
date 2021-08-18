@@ -46,7 +46,7 @@ limitations under the License.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L0-L1280" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L0-L1280" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -1356,7 +1356,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L37-L69" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L37-L69" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def align_img(img, func=&#39;vdec&#39;):
     &#34;&#34;&#34;Align a Ascend image&#39;s width and height using this function.
@@ -1417,7 +1417,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L71-L93" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L71-L93" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def create_align_img(w, h, format=PIXEL_FORMAT_YUV_SEMIPLANAR_420, func=&#39;vdec&#39;):
     &#34;&#34;&#34;Assemble image parameters to the created image desc.
@@ -1481,7 +1481,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L235-L1257" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L235-L1257" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Image():
     &#34;&#34;&#34;Define an Image class to process image.
@@ -2541,7 +2541,7 @@ yuv_croped = Img.bbox_resize(img, bboxes, sizes)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L811-L922" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L811-L922" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bbox_resize(self, img, bboxes, sizes, inner_resize=True):
     &#34;&#34;&#34;Clip the bboxes image and resize to specified size.
@@ -2684,7 +2684,7 @@ yuv_croped = Img.imcrop(img, bboxes)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L713-L809" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L713-L809" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imcrop(self, img, bboxes, scale=1.0):
     &#34;&#34;&#34;Crop image patches, and resize bboxes.
@@ -2817,7 +2817,7 @@ Img.imcrop_paste(yuv_src, yuv_dst, crop_bbox, paste_bbox)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L949-L1039" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L949-L1039" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imcrop_paste(self, src_img, dst_img, crop_bbox, paste_bbox):
     &#34;&#34;&#34;Crop a bbox from src image and paste the cropped bbox to dst image
@@ -2944,7 +2944,7 @@ image = Img.imdecode(data)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L265-L363" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L265-L363" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imdecode(self, array, format=PIXEL_FORMAT_YUV_SEMIPLANAR_420, return_shape=False):
     &#34;&#34;&#34; imdecode(array, format) -&gt; retval
@@ -3079,7 +3079,7 @@ str_encode = np.array(img_encode).tostring()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L366-L453" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L366-L453" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imencode(self, ext, img, params=None):
     &#34;&#34;&#34; Encodes an image into a memory buffer.
@@ -3195,7 +3195,7 @@ im_flip = Img.imflip(img, direction='horizontal')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L615-L648" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L615-L648" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imflip(self, img, direction=&#39;horizontal&#39;):
     &#34;&#34;&#34;Flip an image horizontally or vertically.
@@ -3274,7 +3274,7 @@ yuv_pad = Img.impad(img, padding=(20, 50, 100, 200), pad_val=128)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L1041-L1147" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L1041-L1147" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def impad(self, img, shape=None, padding=None, pad_val=0, padding_mode=&#39;constant&#39;):
     &#34;&#34;&#34;Pad the given image to a certain shape or pad on all sides with
@@ -3416,7 +3416,7 @@ yuv = Img.imread('./image.jpg')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L1149-L1205" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L1149-L1205" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imread(self, img_or_path, flag=&#39;color&#39;, channel_order=&#39;bgr&#39;, backend=&#39;ascend&#39;):
     &#34;&#34;&#34;Read an image.
@@ -3509,7 +3509,7 @@ yuv_rescale2 = Img.imrescale(yuv, (320, 540))
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L554-L613" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L554-L613" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imrescale(self, img, scale, interpolation=&#39;huawei&#39;, return_shape=False):
     &#34;&#34;&#34;Resize image while keeping the aspect ratio.
@@ -3611,7 +3611,7 @@ imresize(img, (w//2, h//2), interpolation)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L456-L551" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L456-L551" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imresize(self, img, dsize, interpolation=&#39;huawei&#39;):
     &#34;&#34;&#34;imresize(array, img, dsize, interpolation=&#39;huawei&#39;) -&gt; retval
@@ -3743,7 +3743,7 @@ rotated image.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L651-L710" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L651-L710" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imrotate(self, 
             img,
@@ -3837,7 +3837,7 @@ Img.imwrite(yuv_org, './saved_img.jpg')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L1208-L1248" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L1208-L1248" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imwrite(self, img, file_path, params=None, auto_mkdir=True):
     &#34;&#34;&#34;Write image to file.
@@ -3898,7 +3898,7 @@ Img.imwrite(yuv_org, './saved_img.jpg')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L147-L232" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L147-L232" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class PicDesc():
     &#34;&#34;&#34;Define a PicDesc object, to construct an picture info.
@@ -3995,7 +3995,7 @@ Img.imwrite(yuv_org, './saved_img.jpg')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/image/geome.py#L214-L220" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L214-L220" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def desc(self):

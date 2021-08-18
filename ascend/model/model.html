@@ -46,7 +46,7 @@ limitations under the License.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L0-L487" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L0-L487" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -593,7 +593,7 @@ print(model.tensor_names)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L102-L486" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L102-L486" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class AscendModel():
     &#34;&#34;&#34;Define a AscendModel class like to manage model and inferring.
@@ -998,7 +998,7 @@ tensor_names = model.tensor_names
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L404-L417" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L404-L417" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def tensor_names(self):
@@ -1036,7 +1036,7 @@ model.feed_data({'input_tensor1':input_data1, 'input_tensor2':input_data2})
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L329-L377" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L329-L377" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def feed_data(self, args:dict):
     &#34;&#34;&#34;Feed data to model.
@@ -1112,7 +1112,7 @@ output_tensor2 = model.get_tensor_by_name('output_tensor_name2')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L380-L402" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L380-L402" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_tensor_by_name(self, out_node_name:str):
     &#34;&#34;&#34;Get tensor data from output of model inference.
@@ -1150,7 +1150,7 @@ model.run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L306-L326" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L306-L326" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34;Run model offline inference.
@@ -1190,7 +1190,7 @@ model.run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L420-L436" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L420-L436" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def set_batch(self, tensor_name, batch):
     &#34;&#34;&#34;Set model input dynamic batch size.
@@ -1226,7 +1226,7 @@ model.run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L438-L455" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L438-L455" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def set_shape(self, tensor_name, shape):
     &#34;&#34;&#34;Set model input dynamic shape.
@@ -1263,7 +1263,7 @@ model.run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L26-L75" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L26-L75" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class DataSet():
     &#34;&#34;&#34;Define a DataSet class to manage input/output buffer of model.
@@ -1324,7 +1324,7 @@ model.run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L37-L39" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L37-L39" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def dataset(self):
@@ -1353,7 +1353,7 @@ the data buffer to the created dataset.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L41-L62" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L41-L62" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def add_buffer(self, ascendarray):
     &#34;&#34;&#34;Bind an AscendArray to the data buffer, and then add 
@@ -1395,7 +1395,7 @@ the data buffer to the created dataset.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L77-L99" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L77-L99" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ModelDesc():
     &#34;&#34;&#34;Define a ModelDesc class to manage loaded model.
@@ -1429,7 +1429,7 @@ the data buffer to the created dataset.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/model/model.py#L92-L94" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L92-L94" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def desc(self):

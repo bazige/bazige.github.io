@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/__init__.py#L0-L6" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/__init__.py#L0-L6" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">from .blas import Matmul, Vmul
 from .op import Cast, ArgMax, Transpose, Permute
@@ -111,7 +111,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L106-L203" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L106-L203" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ArgMax():
     &#34;&#34;&#34; define a ArgMax operator.
@@ -220,7 +220,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L189-L191" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L189-L191" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def data(self):
@@ -242,7 +242,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L165-L187" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L165-L187" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -298,7 +298,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L25-L103" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L25-L103" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Cast():
     &#34;&#34;&#34; define a Cast operator object to release dtype convert. support translate types:
@@ -388,7 +388,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L89-L91" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L89-L91" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def data(self):
@@ -410,7 +410,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L66-L87" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L66-L87" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -445,37 +445,28 @@ def data(self):
 <dd>
 <div class="desc"><p>define a Matmul object, release the function .</p>
 <p>Attributes::
-context: the output image bind with an AscendArray object, image.shape(tupe(h, w, c))
-mat_a
-:
-mat_b
-:
-mat_c
-:</p>
+context (int): the output image bind with an AscendArray object, image.shape(tupe(h, w, c))
+stream (int): The stream resource of this operator
+highprec (bool): Precious mode</p>
 <h2 id="methods">Methods</h2>
-<p>__pre_compute : prepare input data
-run
-: do compute matmul
-out
-: return output result</p></div>
+<p>run : do compute matmul
+out : return output result</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/blas.py#L38-L190" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L37-L186" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Matmul():
     &#34;&#34;&#34; define a Matmul object, release the function .
 
     Attributes::
-        context: the output image bind with an AscendArray object, image.shape(tupe(h, w, c))
-        mat_a  : 
-        mat_b  : 
-        mat_c  :
+        context (int): the output image bind with an AscendArray object, image.shape(tupe(h, w, c))
+        stream (int): The stream resource of this operator
+        highprec (bool): Precious mode
 
     Methods:
-        __pre_compute : prepare input data
-        run           : do compute matmul
-        out           : return output result
+        run : do compute matmul
+        out : return output result
     &#34;&#34;&#34;
     def __init__(self, mat_a, mat_b, mat_c, alpha=1.0, beta=0.0, highprec=True, context=None):
         if context and not isinstance(context, int):
@@ -497,7 +488,6 @@ out
         self.stream = create_stream(context)
         self.highprec = 1 if highprec else 0
 
-        pdb.set_trace()
         # set op model dir
         ret = acl.op.set_model_dir(&#34;./om&#34;)
         if ret != ACL_SUCCESS:
@@ -629,7 +619,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/blas.py#L159-L168" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L155-L164" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def out(self):
@@ -658,7 +648,7 @@ def out(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/blas.py#L170-L182" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L166-L178" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def free_ab(self):
     &#34;&#34;&#34; free alpha and beta data memory
@@ -687,7 +677,7 @@ def out(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/blas.py#L130-L157" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L126-L153" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -742,7 +732,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L305-L406" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L305-L406" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Permute():
     &#34;&#34;&#34; define a Permute operator object to permute the dimensions. 
@@ -855,7 +845,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L392-L394" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L392-L394" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def data(self):
@@ -877,7 +867,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L368-L390" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L368-L390" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -931,7 +921,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L207-L300" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L207-L300" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Transpose():
     &#34;&#34;&#34; define a Transpose operator object to release Transpose. Permutes the dimensions according to perm. 
@@ -1036,7 +1026,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L286-L288" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L286-L288" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def data(self):
@@ -1058,7 +1048,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/op.py#L262-L284" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L262-L284" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -1092,37 +1082,30 @@ def data(self):
 <span>(</span><span>context, mat_a, vec_x, vec_y, alpha=1.0, beta=0.0, highprec=True)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>define a Matmul object, release the function .</p>
+<div class="desc"><p>Define a vector multiply object, release the function .</p>
 <p>Attributes::
-context: the output image bind with an AscendArray object, image.shape(tupe(h, w, c))
-mat_a
-:
-mat_b
-:
-mat_c
-:</p>
+context (int): the output image bind with an AscendArray object, image.shape(tupe(h, w, c))
+stream (int): The stream resource of this operator
+highprec (bool): Precious mode</p>
 <h2 id="methods">Methods</h2>
-<p>__pre_compute : prepare input data
-run
+<p>run
 : do compute matmul
 out
 : return output result</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/blas.py#L194-L345" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L190-L339" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Vmul():
-    &#34;&#34;&#34; define a Matmul object, release the function .
+    &#34;&#34;&#34;Define a vector multiply object, release the function .
 
     Attributes::
-        context: the output image bind with an AscendArray object, image.shape(tupe(h, w, c))
-        mat_a  : 
-        mat_b  : 
-        mat_c  :
+        context (int): the output image bind with an AscendArray object, image.shape(tupe(h, w, c))
+        stream (int): The stream resource of this operator
+        highprec (bool): Precious mode
 
     Methods:
-        __pre_compute : prepare input data
         run           : do compute matmul
         out           : return output result
     &#34;&#34;&#34;
@@ -1162,7 +1145,7 @@ out
 
 
     def __pre_compute(self, mat_a, vec_x, vec_y, alpha, beta):
-        &#34;&#34;&#34; calculate m, n, k and copy alpha/beta to device.
+        &#34;&#34;&#34;Calculate m, n, k and copy alpha/beta to device.
         Args:
             mat_a : (AscendArray) matrix A
             vec_x : (AscendArray) vector x
@@ -1179,14 +1162,14 @@ out
             ]:
             self.m = mat_a.shape[-1]
             self.n = mat_a.shape[0] * 2 // 3
-            self.k = mat_b.shape[1] * 2 // 3
+            self.k = vec_x.shape[1] * 2 // 3
         elif mat_a.format in [
             PIXEL_FORMAT_YUV_SEMIPLANAR_422,
             PIXEL_FORMAT_YVU_SEMIPLANAR_422
             ]:
             self.m = mat_a.shape[-1]
             self.n = mat_a.shape[0] * 2 // 3
-            self.k = mat_b.shape[1] * 2 // 3
+            self.k = vec_y.shape[1] * 2 // 3
         elif mat_a.format == &#39;NCHW&#39;:
             self.m = mat_a.shape[-1]
             self.n = mat_a.shape[0]
@@ -1277,7 +1260,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/blas.py#L314-L323" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L308-L317" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def out(self):
@@ -1306,7 +1289,7 @@ def out(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/c0c4662b8bfdd479b00c923799cfbd69bbea0eb8/ascend/ops/blas.py#L285-L312" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L279-L306" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
