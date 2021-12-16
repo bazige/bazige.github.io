@@ -46,7 +46,7 @@ limitations under the License.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L0-L248" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L0-L245" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -83,14 +83,12 @@ class Profiling():
 
     Methods:
         - profiling(func): do model profiling.
-        - elapse_time(func): do function timling
         - info_print(sort=False): log infomation of profiling.
 
     Typical usage example:
     ```python
     prof = ascend.Profiling(ctx, model.model_id)
 
-    @prof.elapse_time
     @prof.profiling
     def run():
         model.run()
@@ -250,28 +248,6 @@ class Profiling():
                 return func(*args, **kwargs)
 
         return wrapped_function
-
-    def elapse_time(self, func):
-        &#34;&#34;&#34;Print function excute time.
-
-        Args:
-            func (obj): The runing function.
-
-        Returns:
-            wrapped_function
-        &#34;&#34;&#34;        
-        @wraps(func)
-        def wrapped_function(*args, **kwargs):
-            print(func.__name__ + &#34; was called, and start time.&#34;)
-            
-            start_time = time.time()
-            res = func(*args, **kwargs)
-            use_time = time.time() - start_time
-
-            print(f&#34;{func.__name__} elapse time:{use_time}&#34;)
-            return res
-        return wrapped_function
-
 
     def __exit__(self, exc_type, exc_value, traceback):
         &#34;&#34;&#34; unsubscribe thread and destroy subscribe config.
@@ -295,7 +271,29 @@ class Profiling():
 
         ret = acl.prof.destroy_subscribe_config(self._subs_conf)
         if ret != ACL_SUCCESS:
-            raise ValueError(f&#34;destroy subscribe config of profiling failed, return {ret}.&#34;)</code></pre>
+            raise ValueError(f&#34;destroy subscribe config of profiling failed, return {ret}.&#34;)
+
+
+def elapse_time(func):
+    &#34;&#34;&#34;Print function excute time.
+
+    Args:
+        func (obj): The runing function.
+
+    Returns:
+        wrapped_function
+    &#34;&#34;&#34;        
+    @wraps(func)
+    def wrapped_function(*args, **kwargs):
+        print(func.__name__ + &#34; was called, and start time.&#34;)
+        
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        use_time = time.time() - start_time
+
+        print(f&#34;{func.__name__} elapse time:{use_time}&#34;)
+        return res
+    return wrapped_function</code></pre>
 </details>
 </section>
 <section>
@@ -303,6 +301,48 @@ class Profiling():
 <section>
 </section>
 <section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="ascend.profiling.profiling.elapse_time"><code class="name flex">
+<span>def <span class="ident">elapse_time</span></span>(<span>func)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print function excute time.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>func</code></strong> :&ensp;<code>obj</code></dt>
+<dd>The runing function.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>wrapped_function</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L227-L246" class="git-link">Browse git</a>
+</summary>
+<pre><code class="python">def elapse_time(func):
+    &#34;&#34;&#34;Print function excute time.
+
+    Args:
+        func (obj): The runing function.
+
+    Returns:
+        wrapped_function
+    &#34;&#34;&#34;        
+    @wraps(func)
+    def wrapped_function(*args, **kwargs):
+        print(func.__name__ + &#34; was called, and start time.&#34;)
+        
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        use_time = time.time() - start_time
+
+        print(f&#34;{func.__name__} elapse time:{use_time}&#34;)
+        return res
+    return wrapped_function</code></pre>
+</details>
+</dd>
+</dl>
 </section>
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
@@ -324,13 +364,11 @@ It define a decorator running in model infer</p>
 <h2 id="methods">Methods</h2>
 <ul>
 <li>profiling(func): do model profiling.</li>
-<li>elapse_time(func): do function timling</li>
 <li>info_print(sort=False): log infomation of profiling.</li>
 </ul>
 <p>Typical usage example:</p>
 <pre><code class="language-python">prof = ascend.Profiling(ctx, model.model_id)
 
-@prof.elapse_time
 @prof.profiling
 def run():
     model.run()
@@ -340,7 +378,7 @@ run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L26-L248" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L26-L224" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Profiling():
     &#34;&#34;&#34;Define a Profiling class to do profiling and finetune model.
@@ -352,14 +390,12 @@ run()
 
     Methods:
         - profiling(func): do model profiling.
-        - elapse_time(func): do function timling
         - info_print(sort=False): log infomation of profiling.
 
     Typical usage example:
     ```python
     prof = ascend.Profiling(ctx, model.model_id)
 
-    @prof.elapse_time
     @prof.profiling
     def run():
         model.run()
@@ -519,28 +555,6 @@ run()
                 return func(*args, **kwargs)
 
         return wrapped_function
-
-    def elapse_time(self, func):
-        &#34;&#34;&#34;Print function excute time.
-
-        Args:
-            func (obj): The runing function.
-
-        Returns:
-            wrapped_function
-        &#34;&#34;&#34;        
-        @wraps(func)
-        def wrapped_function(*args, **kwargs):
-            print(func.__name__ + &#34; was called, and start time.&#34;)
-            
-            start_time = time.time()
-            res = func(*args, **kwargs)
-            use_time = time.time() - start_time
-
-            print(f&#34;{func.__name__} elapse time:{use_time}&#34;)
-            return res
-        return wrapped_function
-
 
     def __exit__(self, exc_type, exc_value, traceback):
         &#34;&#34;&#34; unsubscribe thread and destroy subscribe config.
@@ -568,45 +582,6 @@ run()
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="ascend.profiling.profiling.Profiling.elapse_time"><code class="name flex">
-<span>def <span class="ident">elapse_time</span></span>(<span>self, func)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Print function excute time.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>func</code></strong> :&ensp;<code>obj</code></dt>
-<dd>The runing function.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<p>wrapped_function</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L204-L223" class="git-link">Browse git</a>
-</summary>
-<pre><code class="python">def elapse_time(self, func):
-    &#34;&#34;&#34;Print function excute time.
-
-    Args:
-        func (obj): The runing function.
-
-    Returns:
-        wrapped_function
-    &#34;&#34;&#34;        
-    @wraps(func)
-    def wrapped_function(*args, **kwargs):
-        print(func.__name__ + &#34; was called, and start time.&#34;)
-        
-        start_time = time.time()
-        res = func(*args, **kwargs)
-        use_time = time.time() - start_time
-
-        print(f&#34;{func.__name__} elapse time:{use_time}&#34;)
-        return res
-    return wrapped_function</code></pre>
-</details>
-</dd>
 <dt id="ascend.profiling.profiling.Profiling.info_print"><code class="name flex">
 <span>def <span class="ident">info_print</span></span>(<span>self, sort=False)</span>
 </code></dt>
@@ -623,7 +598,7 @@ run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L123-L144" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L121-L142" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def info_print(self, sort=False):
     &#34;&#34;&#34;Print profiling info to terminal
@@ -664,7 +639,7 @@ run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L181-L202" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L179-L200" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def profiling(self, func):
     &#34;&#34;&#34;Start profiling thread and do profiling.
@@ -715,12 +690,16 @@ data-gaCategoryParameter="ascend.profiling.profiling">
 <li><code><a title="ascend.profiling" href="index.html">ascend.profiling</a></code></li>
 </ul>
 </li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="ascend.profiling.profiling.elapse_time" href="#ascend.profiling.profiling.elapse_time">elapse_time</a></code></li>
+</ul>
+</li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
 <h4><code><a title="ascend.profiling.profiling.Profiling" href="#ascend.profiling.profiling.Profiling">Profiling</a></code></h4>
 <ul class="">
-<li><code><a title="ascend.profiling.profiling.Profiling.elapse_time" href="#ascend.profiling.profiling.Profiling.elapse_time">elapse_time</a></code></li>
 <li><code><a title="ascend.profiling.profiling.Profiling.info_print" href="#ascend.profiling.profiling.Profiling.info_print">info_print</a></code></li>
 <li><code><a title="ascend.profiling.profiling.Profiling.profiling" href="#ascend.profiling.profiling.Profiling.profiling">profiling</a></code></li>
 </ul>
