@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/__init__.py#L0-L36" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/__init__.py#L0-L38" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># -*- coding: utf-8 -*-
 
@@ -46,6 +46,7 @@ from .model.model import AscendModel
 
 from .video import *
 from .profiling.profiling import Profiling
+from .profiling.profiling import elapse_time
 
 from .ops import *
 from .post_process import *
@@ -58,7 +59,7 @@ __all__ = [
     &#39;rgb2ycbcr&#39;, &#39;bgr2ycbcr&#39;, &#39;ycbcr2rgb&#39;, &#39;ycbcr2bgr&#39;,
     &#39;show_img&#39;, &#39;show_bbox&#39;, &#39;show_tensor&#39;, 
 
-    &#39;Image&#39;, &#39;AscendModel&#39;, &#39;Profiling&#39;,
+    &#39;Image&#39;, &#39;AscendModel&#39;, &#39;Profiling&#39;, &#39;elapse_time&#39;,
 
     &#39;Matmul&#39;, &#39;Vmul&#39;, &#39;Cast&#39;, &#39;ArgMax&#39;, &#39;Transpose&#39;, &#39;Permute&#39;,
 
@@ -69,6 +70,7 @@ __all__ = [
     &#39;imagenet_vid_classes&#39;, &#39;coco_classes&#39;, &#39;cityscapes_classes&#39;, &#39;get_classes&#39;, 
     &#39;Color&#39;, &#39;color_val&#39;, &#39;nms&#39;, &#39;color_gen&#39;,
     &#39;imshow&#39;, &#39;imshow_bboxes&#39;, &#39;imshow_det_bboxes&#39;, &#39;imshow_bboxes_colors&#39;, 
+    &#39;draw_bboxes&#39;,
     &#39;Vdec&#39;, &#39;VideoCapture&#39;, &#39;Venc&#39;, &#39;VideoWriter&#39;,
 ]</code></pre>
 </details>
@@ -133,7 +135,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L21-L38" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L21-L38" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def acl_vesion(self):
     &#34;&#34;&#34; get acl version of system intalled. 
@@ -177,7 +179,7 @@ over foreground)</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/bbox_overlaps.py#L4-L56" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/bbox_overlaps.py#L4-L56" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bbox_overlaps(bboxes1, bboxes2, mode=&#39;iou&#39;, eps=1e-6):
     &#34;&#34;&#34;Calculate the ious between each bbox of bboxes1 and bboxes2.
@@ -268,7 +270,7 @@ and range as input image.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/colorspace.py#L123-L169" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/colorspace.py#L123-L169" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bgr2ycbcr(img, y_only=False):
     &#34;&#34;&#34;Convert a BGR image to YCbCr image.
@@ -334,7 +336,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L114-L136" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L118-L140" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bind_context(context):
     &#34;&#34;&#34; Binding an existing context. If context is not exist, raise an error else set this context.
@@ -376,7 +378,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/common/path.py#L56-L64" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/common/path.py#L56-L64" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def check_file_exist(filename, msg_tmpl=&#34;file &#39;{}&#39; does not exist&#34;):
     &#34;&#34;&#34;Check specific file is exist
@@ -402,7 +404,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/class_names.py#L108-L117" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/class_names.py#L108-L117" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def cityscapes_classes():
     &#34;&#34;&#34;Cityscapes dataset classes
@@ -429,7 +431,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/class_names.py#L85-L105" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/class_names.py#L85-L105" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def coco_classes():
     &#34;&#34;&#34;COCO dataset classes
@@ -472,7 +474,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/color.py#L53-L67" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/color.py#L53-L67" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def color_gen(class_num):
     &#34;&#34;&#34;Convert various input to color tuples.
@@ -506,7 +508,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/color.py#L24-L51" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/color.py#L24-L51" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def color_val(color):
     &#34;&#34;&#34;Convert various input to color tuples.
@@ -539,14 +541,15 @@ Typical usage example:</p>
 </details>
 </dd>
 <dt id="ascend.create_stream"><code class="name flex">
-<span>def <span class="ident">create_stream</span></span>(<span>context=None)</span>
+<span>def <span class="ident">create_stream</span></span>(<span>context=None, stream=None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>create a stream. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>case 1. context is None. Get the context and create a new stream.
-case 2. context is not None. Create a new stream on existing context.</p>
+<p>case 1. stream is not None, return stream.
+case 2. stream and context are None. Get the context and create a new stream.
+case 3. stream is None and context is not None. Create a new stream on existing context.</p>
 </div>
 <h2 id="args">Args</h2>
 <dl>
@@ -561,14 +564,15 @@ case 2. context is not None. Create a new stream on existing context.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L85-L111" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L85-L115" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">def create_stream(context=None):
+<pre><code class="python">def create_stream(context=None, stream=None):
     &#34;&#34;&#34; create a stream. 
 
     .. note::
-       case 1. context is None. Get the context and create a new stream.
-       case 2. context is not None. Create a new stream on existing context.
+       case 1. stream is not None, return stream.
+       case 2. stream and context are None. Get the context and create a new stream.
+       case 3. stream is None and context is not None. Create a new stream on existing context.
 
     Args:
         context (int): If context is None, it will get context and then create a stream.
@@ -576,6 +580,9 @@ case 2. context is not None. Create a new stream on existing context.</p>
     Returns:
         [int]: The created stream or original
     &#34;&#34;&#34;
+    if stream:
+        return stream
+
     if context is None:
         context, ret = acl.rt.get_context()
         assert ret == ACL_SUCCESS, f&#34;get context failed in bind_stream, return {ret}.&#34;
@@ -610,7 +617,7 @@ case 2. context is not None. Create a new stream on existing context.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L64-L82" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L64-L82" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def device_num():
     &#34;&#34;&#34;Get device number of the system
@@ -633,6 +640,139 @@ case 2. context is not None. Create a new stream on existing context.</p>
     return count</code></pre>
 </details>
 </dd>
+<dt id="ascend.draw_bboxes"><code class="name flex">
+<span>def <span class="ident">draw_bboxes</span></span>(<span>img, bboxes, class_names, thickness=1, font_scale=0.5, show=True, win_name='', wait_time=0, out_file=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Draw bboxes and class labels (with scores) on an image with colors.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>img</code></strong> :&ensp;<code><a title="ascend.AscendArray" href="#ascend.AscendArray">AscendArray</a>, ndarray</code></dt>
+<dd>The image to be displayed.</dd>
+<dt><strong><code>bboxes</code></strong> :&ensp;<code>ndarray</code></dt>
+<dd>Bounding boxes (with scores, label), shaped (n, 5) or (n, 6).
+shape like [x1, y1, x2, y2, scores, classid] or [x1, y1, x2, y2, classid]</dd>
+<dt><strong><code>class_names</code></strong> :&ensp;<code>list[str]</code></dt>
+<dd>Names of each classes.</dd>
+<dt><strong><code>thickness</code></strong> :&ensp;<code>int</code></dt>
+<dd>Thickness of lines.</dd>
+<dt><strong><code>font_scale</code></strong> :&ensp;<code>float</code></dt>
+<dd>Font scales of texts.</dd>
+<dt><strong><code>show</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Whether to show the image.</dd>
+<dt><strong><code>win_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The window name.</dd>
+<dt><strong><code>wait_time</code></strong> :&ensp;<code>int</code></dt>
+<dd>Value of waitKey param.</dd>
+<dt><strong><code>out_file</code></strong> :&ensp;<code>str</code> or <code>None</code></dt>
+<dd>The filename to write the image.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray</code></dt>
+<dd>The image with bboxes drawn on it.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L239-L293" class="git-link">Browse git</a>
+</summary>
+<pre><code class="python">def draw_bboxes(img,
+                bboxes,
+                class_names,
+                thickness=1,
+                font_scale=0.5,
+                show=True,
+                win_name=&#39;&#39;,
+                wait_time=0,
+                out_file=None):
+    &#34;&#34;&#34;Draw bboxes and class labels (with scores) on an image with colors.
+
+    Args:
+        img (AscendArray, ndarray): The image to be displayed.
+        bboxes (ndarray): Bounding boxes (with scores, label), shaped (n, 5) or (n, 6).
+            shape like [x1, y1, x2, y2, scores, classid] or [x1, y1, x2, y2, classid]
+
+        class_names (list[str]): Names of each classes.
+        thickness (int): Thickness of lines.
+        font_scale (float): Font scales of texts.
+        show (bool): Whether to show the image.
+        win_name (str): The window name.
+        wait_time (int): Value of waitKey param.
+        out_file (str or None): The filename to write the image.
+
+    Returns:
+        ndarray: The image with bboxes drawn on it.
+    &#34;&#34;&#34;
+    assert bboxes.ndim == 2
+    assert bboxes.shape[1] == 5 or bboxes.shape[1] == 6
+    img = trans_numpy(img)
+
+    img = np.ascontiguousarray(img).astype(np.uint8)  # 可能传入的不是uint8
+    font = cv2.FONT_HERSHEY_DUPLEX
+
+    for bbox, label in zip(bboxes[:,:5], bboxes[:,-1].astype(&#39;int32&#39;)):
+        bbox_int = bbox.astype(np.int32)
+        left_top = (bbox_int[0], bbox_int[1])
+        right_bottom = (bbox_int[2], bbox_int[3])
+        color = COLORS_81[label%80 + 1].tolist()
+        cv2.rectangle(img, left_top, right_bottom, color, thickness)
+        label_text = class_names[label] if class_names is not None else f&#39;cls {label}&#39;
+
+        if len(bbox) &gt; 4:
+            label_text += f&#39;:{bbox[-1]:.02f}&#39;
+
+        text_w, text_h = cv2.getTextSize(label_text, font, font_scale, thickness)[0]
+        cv2.rectangle(img, left_top, (bbox_int[0] + text_w, bbox_int[1] + text_h + 5), color, -1)
+        cv2.putText(img, label_text, (bbox_int[0], bbox_int[1] + 15),
+                    font, font_scale, (255, 255, 255), thickness, cv2.LINE_AA)
+
+    if show:
+        imshow(img, win_name, wait_time)
+    if out_file is not None:
+        cv2.imwrite(out_file, img)
+    return img</code></pre>
+</details>
+</dd>
+<dt id="ascend.elapse_time"><code class="name flex">
+<span>def <span class="ident">elapse_time</span></span>(<span>func)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Print function excute time.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>func</code></strong> :&ensp;<code>obj</code></dt>
+<dd>The runing function.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>wrapped_function</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L227-L246" class="git-link">Browse git</a>
+</summary>
+<pre><code class="python">def elapse_time(func):
+    &#34;&#34;&#34;Print function excute time.
+
+    Args:
+        func (obj): The runing function.
+
+    Returns:
+        wrapped_function
+    &#34;&#34;&#34;        
+    @wraps(func)
+    def wrapped_function(*args, **kwargs):
+        print(func.__name__ + &#34; was called, and start time.&#34;)
+        
+        start_time = time.time()
+        res = func(*args, **kwargs)
+        use_time = time.time() - start_time
+
+        print(f&#34;{func.__name__} elapse time:{use_time}&#34;)
+        return res
+    return wrapped_function</code></pre>
+</details>
+</dd>
 <dt id="ascend.get_classes"><code class="name flex">
 <span>def <span class="ident">get_classes</span></span>(<span>dataset)</span>
 </code></dt>
@@ -651,7 +791,7 @@ case 2. context is not None. Create a new stream on existing context.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/class_names.py#L130-L151" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/class_names.py#L130-L151" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_classes(dataset):
     &#34;&#34;&#34;Get class names of a dataset.
@@ -690,7 +830,7 @@ case 2. context is not None. Create a new stream on existing context.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/class_names.py#L24-L67" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/class_names.py#L24-L67" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imagenet_det_classes():
     &#34;&#34;&#34;Imagenet detection classes
@@ -751,7 +891,7 @@ case 2. context is not None. Create a new stream on existing context.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/class_names.py#L70-L82" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/class_names.py#L70-L82" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imagenet_vid_classes():
     &#34;&#34;&#34;Imagenet validation classes
@@ -798,7 +938,7 @@ data = ascend.imgs2tensor(imgs, tensor_fmt='NHWC')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/tensor.py#L38-L106" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/tensor.py#L38-L106" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imgs2tensor(imgs, tensor_fmt=&#39;NCHW&#39;, tensor_ptr=None):
     &#34;&#34;&#34;Convert 3-channel images to tensor
@@ -888,7 +1028,7 @@ data = ascend.imgs2tensor(imgs, tensor_fmt='NHWC')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L28-L48" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L28-L48" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imshow(img, win_name=&#39;&#39;, wait_time=0):
     &#34;&#34;&#34;Show an image.
@@ -947,7 +1087,7 @@ data = ascend.imgs2tensor(imgs, tensor_fmt='NHWC')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L51-L101" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L51-L101" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imshow_bboxes(img,
                   bboxes,
@@ -1039,7 +1179,7 @@ shape like [x1, y1, x2, y2, scores, classid] or [x1, y1, x2, y2, classid]</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L176-L236" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L176-L236" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imshow_bboxes_colors(img,
                    bboxes,
@@ -1149,7 +1289,7 @@ Defaults to 'green'.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L104-L173" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L104-L173" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imshow_det_bboxes(img,
                       bboxes,
@@ -1242,7 +1382,7 @@ Defaults to 'green'.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/common/path.py#L34-L45" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/common/path.py#L34-L45" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def is_filepath(x):
     &#34;&#34;&#34;judge x is a filepath
@@ -1273,7 +1413,7 @@ Defaults to 'green'.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/common/path.py#L67-L77" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/common/path.py#L67-L77" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def mkdir_or_exist(dir_name, mode=0o777):
     &#34;&#34;&#34;Make a directory
@@ -1308,7 +1448,7 @@ Defaults to 0.3.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/nms.py#L17-L65" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/nms.py#L17-L65" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def nms(boxes, scores, nms_thresh=0.3):
     &#34;&#34;&#34;Suppress overlapping detected bbox.
@@ -1395,7 +1535,7 @@ and range as input image.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/colorspace.py#L73-L120" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/colorspace.py#L73-L120" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def rgb2ycbcr(img, y_only=False):
     &#34;&#34;&#34;Convert a RGB image to YCbCr image.
@@ -1470,7 +1610,7 @@ Typical usage example:</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L40-L61" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L40-L61" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run_mode():
     &#34;&#34;&#34; get run mode of Ascend310. 
@@ -1534,7 +1674,7 @@ you'd better install opencv first.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/misc.py#L115-L181" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/misc.py#L114-L180" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def show_bbox(image, bboxs_list, color=None, thickness=1, font_scale=0.3, wait_time_ms=0, names=None,
               is_show=True, is_without_mask=False):
@@ -1621,7 +1761,7 @@ you'd better install opencv first.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/common/graph.py#L18-L39" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/common/graph.py#L18-L39" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def show_growth(show_cnt=0):
     &#34;&#34;&#34;Show python object references growth, the default show_cnt is 0.
@@ -1670,7 +1810,7 @@ function, you'd better install opencv first.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/misc.py#L22-L65" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/misc.py#L21-L64" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def show_img(imgs, window_names=None, wait_time_ms=0):
     &#34;&#34;&#34;Displays an image or a list of images in specified windows or self-initiated windows.
@@ -1749,7 +1889,7 @@ function, you'd better install opencv first.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/misc.py#L184-L253" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/misc.py#L183-L252" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def show_tensor(tensor, resize_hw=None, is_show=True, wait_time_ms=0):
     &#34;&#34;&#34;Show tensor as heatmap.
@@ -1851,7 +1991,7 @@ If so, convert it back to BGR. Defaults to True.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/tensor.py#L109-L161" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/tensor.py#L109-L161" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def tensor2imgs(tensor, mean=(0, 0, 0), std=(1, 1, 1), to_rgb=True):
     &#34;&#34;&#34;Convert tensor to a 3-channel images
@@ -1921,7 +2061,7 @@ If so, convert it back to BGR. Defaults to True.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/class_names.py#L11-L21" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/class_names.py#L11-L21" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def voc_classes():
     &#34;&#34;&#34;VOC classes
@@ -1949,7 +2089,7 @@ If so, convert it back to BGR. Defaults to True.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/class_names.py#L2-L8" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/class_names.py#L2-L8" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def wider_face_classes():
     &#34;&#34;&#34;Wider face classes.
@@ -1989,7 +2129,7 @@ and range as input image.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/colorspace.py#L216-L257" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/colorspace.py#L216-L257" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def ycbcr2bgr(img):
     &#34;&#34;&#34;Convert a YCbCr image to BGR image.
@@ -2065,7 +2205,7 @@ and range as input image.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/colorspace.py#L172-L213" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/colorspace.py#L172-L213" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def ycbcr2rgb(img):
     &#34;&#34;&#34;Convert a YCbCr image to RGB image.
@@ -2140,7 +2280,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L106-L203" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L106-L203" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class ArgMax():
     &#34;&#34;&#34; define a ArgMax operator.
@@ -2249,7 +2389,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L189-L191" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L189-L191" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def data(self):
@@ -2271,7 +2411,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L165-L187" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L165-L187" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -2356,7 +2496,7 @@ or band it to a new memory.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L21-L567" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L21-L567" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class AscendArray():
     &#34;&#34;&#34;Define a AscendArray data class like numpy ndarray.
@@ -2943,7 +3083,7 @@ data = ascend.AscendArray.clone(array)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L400-L443" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L400-L443" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@classmethod
 def clone(cls, array, context=None, format=None, flag=&#34;DEVICE&#34;):
@@ -3000,7 +3140,7 @@ def clone(cls, array, context=None, format=None, flag=&#34;DEVICE&#34;):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L112-L114" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L112-L114" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def ascend_data(self): 
@@ -3013,7 +3153,7 @@ def ascend_data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L131-L133" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L131-L133" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def context(self):
@@ -3026,7 +3166,7 @@ def context(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L183-L185" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L183-L185" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def dtype(self):
@@ -3039,7 +3179,7 @@ def dtype(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L126-L128" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L126-L128" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def flag(self):
@@ -3052,7 +3192,7 @@ def flag(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L206-L208" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L206-L208" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def format(self):
@@ -3065,7 +3205,7 @@ def format(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L201-L203" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L201-L203" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def itemsize(self):
@@ -3078,7 +3218,7 @@ def itemsize(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L196-L198" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L196-L198" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def nbytes(self):
@@ -3091,7 +3231,7 @@ def nbytes(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L162-L164" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L162-L164" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def ndim(self):
@@ -3104,7 +3244,7 @@ def ndim(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L167-L169" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L167-L169" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def shape(self):
@@ -3117,7 +3257,7 @@ def shape(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L218-L220" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L218-L220" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def size(self):
@@ -3130,7 +3270,7 @@ def size(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L313-L315" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L313-L315" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def to_np(self):
@@ -3164,7 +3304,7 @@ ascend_array = ascend_array.astype(np.float16)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L351-L372" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L351-L372" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def astype(self, dtype):
     &#34;&#34;&#34; Cast a tensor from src data type to dst data type. Firstly, we try to use Cast operator 
@@ -3218,7 +3358,7 @@ ascend_array = ascend_array.reshape(64, 36)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L222-L249" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L222-L249" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def reshape(self, shape):
     &#34;&#34;&#34;Gives a new shape to an array without changing its data.
@@ -3272,7 +3412,7 @@ ascend_array = ascend_array.reshape(64, 36)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L251-L266" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L251-L266" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def resize(self, shape: tuple):
     &#34;&#34;&#34;Resize the shape and data of AscendArray.
@@ -3311,7 +3451,7 @@ ascend_array1.to(ascend_array2)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L445-L469" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L445-L469" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def to(self, ascendarray):
     &#34;&#34;&#34;Copy this AscendArray data to another ascendarray(AscendArray).
@@ -3358,7 +3498,7 @@ ascend_array.to_ascend(array)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L317-L349" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L317-L349" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def to_ascend(self, array):
     &#34;&#34;&#34;Copy all the data of array(np.ndarray) to AscendArray.
@@ -3418,7 +3558,7 @@ data = ascend_array.to_numpy()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L268-L311" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L268-L311" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def to_numpy(self, nbytes=None):
     &#34;&#34;&#34;Copy the attributes and data of AscendArray to np.ndarry object.
@@ -3489,7 +3629,7 @@ ascend_array = ascend_array.astype(np.float16)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/data/ascendarray.py#L374-L398" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/data/ascendarray.py#L374-L398" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def transpose(self, axes=None):
     &#34;&#34;&#34;Reverse or permute the axes of an array, and returns the modified array.
@@ -3568,7 +3708,7 @@ print(model.tensor_names)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L102-L486" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/model/model.py#L102-L488" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class AscendModel():
     &#34;&#34;&#34;Define a AscendModel class like to manage model and inferring.
@@ -3752,18 +3892,20 @@ print(model.tensor_names)
         Log(INFO, f&#34;data format: {data.format}, net_in format: {net_in.format}.&#34;)
 
         # case 1: input yuv420_nv12 or yuv420_nv21 or yuv400 image
-        if data.ndim == 2:
-            # only judge channel is same to model input
+        if data.ndim == 2 and net_in.ndim != 2:
+            # for single image/tensor, only judge channel is same to model input
             if (net_in.format == &#39;NCHW&#39; and net_in.shape[1] != 1) or \
-                (net_in.format == &#34;NHWC&#34; and net_in.shape[3] != 1):
-                raise ValueError(f&#34;Input tensor&#39;s expects a single channel, but got {net_in.shape}.&#34;)
+                    (net_in.format == &#34;NHWC&#34; and net_in.shape[3] != 1):
+                raise ValueError(
+                    f&#34;Input tensor&#39;s expects a single channel with shape {net_in.shape}, but got {data.shape}.&#34;)
 
         # case 2: input RGB/BGR or 3-dims tensor
         if data.ndim == 3:
             # only judge channel is same to model input
             if (net_in.format == &#39;NCHW&#39; and net_in.shape[1] != 3) or \
-                (net_in.format == &#34;NHWC&#34; and net_in.shape[3] != 3):
-                raise ValueError(f&#34;Input tensor&#39;s expects a single channel, but got {net_in.shape}.&#34;)
+                    (net_in.format == &#34;NHWC&#34; and net_in.shape[3] != 3):
+                raise ValueError(
+                    f&#34;Input tensor&#39;s expects a single channel with shape {net_in.shape}, but got {data.shape}.&#34;)
 
         # case 3: input 4-dims tensor
         if data.ndim == 4:
@@ -3816,7 +3958,7 @@ print(model.tensor_names)
             raise TypeError(&#39;Input args of feed_data is null.&#39;)
 
         if len(args) != self.net_in_n:
-            raise ValueError(&#39;Input tensor number to model should be equal to the net(&#39;
+            raise ValueError(&#39;Input tensor number to model should be equal to the net input number (&#39;
                 f&#39;{self.net_in_n}). But the actual input is: {len(args)}&#39;)
 
         for key, in_tensor in args.items():
@@ -3973,7 +4115,7 @@ tensor_names = model.tensor_names
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L404-L417" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/model/model.py#L406-L419" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def tensor_names(self):
@@ -4011,7 +4153,7 @@ model.feed_data({'input_tensor1':input_data1, 'input_tensor2':input_data2})
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L329-L377" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/model/model.py#L331-L379" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def feed_data(self, args:dict):
     &#34;&#34;&#34;Feed data to model.
@@ -4032,7 +4174,7 @@ model.feed_data({'input_tensor1':input_data1, 'input_tensor2':input_data2})
         raise TypeError(&#39;Input args of feed_data is null.&#39;)
 
     if len(args) != self.net_in_n:
-        raise ValueError(&#39;Input tensor number to model should be equal to the net(&#39;
+        raise ValueError(&#39;Input tensor number to model should be equal to the net input number (&#39;
             f&#39;{self.net_in_n}). But the actual input is: {len(args)}&#39;)
 
     for key, in_tensor in args.items():
@@ -4087,7 +4229,7 @@ output_tensor2 = model.get_tensor_by_name('output_tensor_name2')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L380-L402" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/model/model.py#L382-L404" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get_tensor_by_name(self, out_node_name:str):
     &#34;&#34;&#34;Get tensor data from output of model inference.
@@ -4125,7 +4267,7 @@ model.run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L306-L326" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/model/model.py#L308-L328" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34;Run model offline inference.
@@ -4165,7 +4307,7 @@ model.run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L420-L436" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/model/model.py#L422-L438" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def set_batch(self, tensor_name, batch):
     &#34;&#34;&#34;Set model input dynamic batch size.
@@ -4201,7 +4343,7 @@ model.run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/model/model.py#L438-L455" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/model/model.py#L440-L457" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def set_shape(self, tensor_name, shape):
     &#34;&#34;&#34;Set model input dynamic shape.
@@ -4252,7 +4394,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L25-L103" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L25-L103" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Cast():
     &#34;&#34;&#34; define a Cast operator object to release dtype convert. support translate types:
@@ -4342,7 +4484,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L89-L91" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L89-L91" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def data(self):
@@ -4364,7 +4506,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L66-L87" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L66-L87" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -4402,7 +4544,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/color.py#L9-L21" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/color.py#L9-L21" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Color(Enum):
     &#34;&#34;&#34;An enum that defines common colors.
@@ -4506,7 +4648,7 @@ for ctx in Context({0, 1}):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L139-L390" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L143-L394" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Context():
     &#34;&#34;&#34;Define a Context class to manage context of device.
@@ -4605,7 +4747,7 @@ for ctx in Context({0, 1}):
 
         # below we not sure this method is better
         assert sorted(devices)[0] &gt;= 0 and sorted(devices)[-1] &lt; self.device_num, \
-            f&#34;Device id {device_id} is out of range [0, {self.device_num}).&#34;
+            f&#34;Device id {devices} is out of range [0, {self.device_num}).&#34;
    
 
     def __init_resource(self, acl_json=None):
@@ -4781,7 +4923,7 @@ for ctx in Context({0, 1}):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L278-L304" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L282-L308" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@classmethod
 def runmode(self, device_id):
@@ -4832,7 +4974,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L319-L346" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L323-L350" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bind_device(self, device_id):
     &#34;&#34;&#34;Bind device resource according to device_id.
@@ -4872,7 +5014,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L361-L364" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L365-L368" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def context_add(self):
     &#34;&#34;&#34;Not release yet
@@ -4898,7 +5040,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L306-L316" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L310-L320" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def current_context(self, devnum=None):
     &#34;&#34;&#34;Get the context working on
@@ -4926,7 +5068,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L348-L354" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L352-L358" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def device_available(self):
     &#34;&#34;&#34;Judge the device is available or not
@@ -4945,7 +5087,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L356-L359" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L360-L363" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def stream_add(self):
     &#34;&#34;&#34;Not release yet
@@ -4987,7 +5129,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L235-L1257" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L278-L1273" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Image():
     &#34;&#34;&#34;Define an Image class to process image.
@@ -5011,7 +5153,7 @@ def runmode(self, device_id):
         self.context = context
  
         # create a stream according to context
-        self.stream = create_stream(context)
+        self.stream = create_stream(context, stream)
 
         # create dvpp image processing channel
         self._channel_desc = acl.media.dvpp_create_channel_desc()
@@ -5085,7 +5227,7 @@ def runmode(self, device_id):
         # clone input image to device
         data = AscendArray.clone(array, context=self.context, flag=&#34;DVPP&#34;)
 
-        image = create_align_img(w, h, format=format, func=&#39;jpegd&#39; if decoder == &#39;jpg&#39; else &#39;pngd&#39;)
+        image = _create_align_img(w, h, format=format, func=&#39;jpegd&#39; if decoder == &#39;jpg&#39; else &#39;pngd&#39;)
 
         # create output image desc and bind it with a output AscendArray object
         pic_inst = PicDesc(image, (w, h))
@@ -5161,7 +5303,7 @@ def runmode(self, device_id):
         if self._channel_desc is None:
             raise ValueError(f&#34;channel desc is not initialized before imdecode.&#34;)
 
-        src_img, shape = align_img(img, func=&#39;encode&#39;)
+        src_img, shape = _align_img(img, func=&#39;encode&#39;)
 
         # create input image desc and bind it with a input AscendArray object
         src_inst = PicDesc(src_img, shape)
@@ -5270,12 +5412,15 @@ def runmode(self, device_id):
             raise ValueError(f&#34;channel desc is not initialized before imdecode.&#34;)
 
         # do image aligned and create aligned image to save resized image
-        src_img, shape = align_img(img, func=&#39;resize&#39;)
-        dst_img = create_align_img(dsize[0], dsize[1], format=img.format, func=&#39;resize&#39;)
+        src_img, shape = _align_img(img, func=&#39;resize&#39;)
+        dst_img = _create_align_img(dsize[0], dsize[1], format=img.format, func=&#39;resize&#39;)
 
         # create output image desc and bind it with a output AscendArray object
+        # warning: The dst_inst must defined as dst_inst = PicDesc(dst_img), not to be
+        #          define as dst_inst = PicDesc(dst_img, dsize), otherwise, the dst image&#39;s
+        #          last lines will filled with random colors(value).
         src_inst = PicDesc(src_img, shape)
-        dst_inst = PicDesc(dst_img, dsize)
+        dst_inst = PicDesc(dst_img)
 
         # create resize config
         resize_conf = acl.media.dvpp_create_resize_config()
@@ -5502,10 +5647,10 @@ def runmode(self, device_id):
         # step 1: caculate the cliped bbox shape
         _bboxes = bboxes[None, ...] if bboxes.ndim == 1 else bboxes
         scaled_bboxes = bbox_scaling(_bboxes, scale).astype(np.int32)
-        clipped_bbox = bbox_clip(scaled_bboxes, img.shape)
-
+        clipped_bbox = _align_roi(scaled_bboxes, img)
+        
         # align original image
-        src_img, shape = align_img(img, func=&#39;crop&#39;)
+        src_img, shape = _align_img(img, func=&#39;crop&#39;)
 
         # step 2: input desc assembling, only process one image.
         image_inst = PicDesc([src_img], shape)
@@ -5516,15 +5661,9 @@ def runmode(self, device_id):
         for i in range(clipped_bbox.shape[0]):
             x1, y1, x2, y2 = clipped_bbox[i, :].tolist()
             
-            # align w and h, and calc memory size of output box image
-            dst_stride_w = aligned(x2 - x1, aligned=&#39;w&#39;)
-            dst_stride_h = aligned(y2 - y1, aligned=&#39;h&#39;)
-            dst_buf_size = calc_size(dst_stride_w, dst_stride_h, img.format)
-            
             # create a bbox(a AscendArray object) and bind with dvpp memory
-            dst_image = AscendArray((dst_stride_w,), np.dtype(&#39;uint8&#39;), size=dst_buf_size, \
-                                format=img.format, flag=&#39;DVPP&#39;)
-            bboxes.append(dst_image.reshape(dst_image.shape[::-1]))
+            dst_image = _create_align_img(x2 - x1, y2 - y1, format=img.format, func=&#39;crop&#39;)
+            bboxes.append(dst_image)
 
             # create roi description
             roi_conf = acl.media.dvpp_create_roi_config(x1, x2, y1, y2)
@@ -5553,8 +5692,7 @@ def runmode(self, device_id):
             assert ret == ACL_SUCCESS, \
                 ValueError(f&#34;Failed to do dvpp_destroy_resize_config, return {ret}.&#34;)
 
-        del image_inst
-        del bboxes_inst
+        del image_inst, bboxes_inst
         Log(INFO, &#39;vpc crop process success&#39;)
 
         if not np.isclose(scale, 1.0, rtol=1e-2, atol=1e-03):
@@ -5611,13 +5749,13 @@ def runmode(self, device_id):
         # step 1: caculate the cliped bbox shape
         _bboxes = bboxes[None, ...] if bboxes.ndim == 1 else bboxes
         scaled_bboxes = bbox_scaling(_bboxes, 1.0).astype(np.int32)
-        clipped_bbox = bbox_clip(scaled_bboxes, img.shape)
+        clipped_bbox = _align_roi(scaled_bboxes, img)
 
         # align original image 
-        src_img, shape = align_img(img, func=&#39;crop&#39;)
+        src_img, shape = _align_img(img, func=&#39;crop&#39;)
 
         # step 2: input desc assembile, only process one image.
-        image_inst = PicDesc([src_img], img.shape[::-1])
+        image_inst = PicDesc([src_img], shape)
         roi_n_list = [clipped_bbox.shape[0]]
 
         # step 3: clip bboxes of image
@@ -5628,17 +5766,10 @@ def runmode(self, device_id):
 
             # align w and h, and calc memory size of output box image
             if inner_resize:
-                dst_stride_w = aligned(_sizes[i][0], aligned=&#39;w&#39;)
-                dst_stride_h = aligned(_sizes[i][1], aligned=&#39;h&#39;)
+                dst_image = _create_align_img(_sizes[i][0], _sizes[i][1], format=img.format, func=&#39;crop&#39;)
             else:
-                dst_stride_w = aligned(x2 - x1, aligned=&#39;w&#39;)
-                dst_stride_h = aligned(y2 - y1, aligned=&#39;h&#39;)
-            dst_buf_size = calc_size(dst_stride_w, dst_stride_h, img.format)
-            
-            # create a bbox(a AscendArray object) and bind with dvpp memory
-            dst_image = AscendArray((dst_stride_w,), np.dtype(&#39;uint8&#39;), size=dst_buf_size, \
-                                format=img.format, flag=&#39;DVPP&#39;)
-            bboxes.append(dst_image.reshape(dst_image.shape[::-1]))
+                dst_image = _create_align_img(x2 - x1, y2 - y1, format=img.format, func=&#39;crop&#39;)
+            bboxes.append(dst_image)
 
             # create roi description
             roi_conf = acl.media.dvpp_create_roi_config(x1, x2, y1, y2)
@@ -5678,30 +5809,6 @@ def runmode(self, device_id):
 
         return bboxes
 
-    def __align_roi(self, bbox, img_shape):
-        &#34;&#34;&#34; align bbox left-top and right-bottom point
-        Args:
-            bbox : Input bbox(np.ndrray) with shape (4, ) or (n, 4)
-            img_shape : tuple(h, w), input image shape, and bbox location should in image.
-
-        Returns:
-            aligned bbox, list with shape (4, ) or (n, 4).
-        &#34;&#34;&#34;
-        if not isinstance(img_shape, tuple):
-            raise TypeError(f&#34;Input img_shape expect a tuple, but got {type(img_shape)}.&#34;)
-            
-        bbox = bbox[None, ...] if bbox.ndim == 1 else bbox
-        for i, box in enumerate(bbox):
-            assert box[0] &lt; img_shape[1] and box[1] &lt; img_shape[0] and box[2] &gt; 0 \
-                and box[3] &gt; 0, f&#34;Input {i}-th bbox([startx, starty, endx, endy]) beyond the image.&#34;
-
-        for i in range(bbox.shape[0]):
-            bbox[i][0] = bbox[i][0] &gt;&gt; 1 &lt;&lt; 1
-            bbox[i][1] = bbox[i][1] &gt;&gt; 1 &lt;&lt; 1
-            bbox[i][2] = (bbox[i][2] &gt;&gt; 1 &lt;&lt; 1) - 1
-            bbox[i][3] = (bbox[i][3] &gt;&gt; 1 &lt;&lt; 1) - 1
-
-        return bbox
 
     def imcrop_paste(self, src_img, dst_img, crop_bbox, paste_bbox):
         &#34;&#34;&#34;Crop a bbox from src image and paste the cropped bbox to dst image
@@ -5744,26 +5851,25 @@ def runmode(self, device_id):
         if crop_bbox.shape[0] != paste_bbox.shape[0]:
             raise ValueError(f&#34;Input crop_bbox and paste_bbox should have same number bbox.&#34;)
 
-        # step 1: check input bbox, make startx and starty to even and endx and endy to odd
-        cbbox = self.__align_roi(crop_bbox, src_img.shape).tolist()
-        pbbox = self.__align_roi(paste_bbox, dst_img.shape).tolist()
+        # step 1: clip input bbox to fit image, make startx and starty to even and endx and endy to odd
+        cbbox = _align_roi(crop_bbox, src_img).tolist()
+        pbbox = _align_roi(paste_bbox, dst_img, is_paste=True).tolist()
 
         # step 2: align original image
-        crop_img, _ = align_img(src_img, func=&#39;crop&#39;)
-        paste_img, _ = align_img(dst_img, func=&#39;crop&#39;)
+        crop_img, shape_c = _align_img(src_img, func=&#39;crop&#39;)
+        paste_img, shape_p = _align_img(dst_img, func=&#39;crop&#39;)
 
         # step 3: create output image desc and bind it with a output AscendArray object
-        src_desc = PicDesc([crop_img], src_img.shape)
-        dst_desc = PicDesc([paste_img] * len(pbbox), dst_img.shape)
+        src_desc = PicDesc([crop_img], shape_c)
+        dst_desc = PicDesc([paste_img] * len(pbbox), shape_p)
 
         # step 4: startx of paste box aligned to 16 and append crop/paste roi to list
         crop_conf_list, past_conf_list = [], []
         for i in range(len(pbbox)):
-            pbbox[i][0] = aligned(pbbox[i][0], aligned=&#39;w&#39;)
-            cstartx, cendx, cstarty, cendy = cbbox[i][0], cbbox[i][2], cbbox[i][1], cbbox[i][3]
-            pstartx, pendx, pstarty, pendy = pbbox[i][0], pbbox[i][2], pbbox[i][1], pbbox[i][3]
-            crop_conf = acl.media.dvpp_create_roi_config(cstartx, cendx, cstarty, cendy)
-            past_conf = acl.media.dvpp_create_roi_config(pstartx, pendx, pstarty, pendy)
+            crop_conf = acl.media.dvpp_create_roi_config(
+                cbbox[i][0], cbbox[i][2], cbbox[i][1], cbbox[i][3])
+            past_conf = acl.media.dvpp_create_roi_config(
+                pbbox[i][0], pbbox[i][2], pbbox[i][1], pbbox[i][3])
             crop_conf_list.append(crop_conf)
             past_conf_list.append(past_conf)
 
@@ -5856,22 +5962,21 @@ def runmode(self, device_id):
                             f&#39;But received {padding}&#39;)
 
         # align original image shape and create a output to save padding result.
-        src_img, _ = align_img(img)
-        dst_w = padding[0] + w + padding[2]
-        dst_h = padding[1] + h + padding[3]
-        dst_img = create_align_img(dst_w, dst_h, format=img.format)
+        src_img, src_shape = _align_img(img)
+        dst_w, dst_h = padding[0] + w + padding[2], padding[1] + h + padding[3]
+        dst_img = _create_align_img(dst_w, dst_h, format=img.format)
 
         # set the padding result&#39;s memory with pad_val
         Memory.reset(dst_img.ascend_data, dst_img.nbytes, pad_val)
 
         # create output image desc and bind it with a output AscendArray object
-        src_desc = PicDesc(src_img, img.shape)
+        src_desc = PicDesc(src_img, src_shape)
         dst_desc = PicDesc(dst_img, (dst_h, dst_w))
 
         # paste area startx, starty, endx, endy, and align startx with 16
         startx = aligned(padding[0], aligned=&#39;w&#39;)
         starty = padding[1] &gt;&gt; 1 &lt;&lt; 1
-        endx = ((padding[0] + w) &gt;&gt; 1 &lt;&lt; 1) - 1
+        endx = ((startx + w) &gt;&gt; 1 &lt;&lt; 1) - 1
         endy = ((padding[1] + h) &gt;&gt; 1 &lt;&lt; 1) - 1
 
         # create roi description
@@ -5903,7 +6008,7 @@ def runmode(self, device_id):
         Log(INFO, &#39;image padding process success&#39;)
         return dst_img
 
-    def imread(self, img_or_path, flag=&#39;color&#39;, channel_order=&#39;bgr&#39;, backend=&#39;ascend&#39;):
+    def imread(self, img_or_path, flag=&#39;color&#39;, channel_order=&#39;bgr&#39;, backend=&#39;ascend&#39;, keep_shape=False):
         &#34;&#34;&#34;Read an image.
 
         Args:
@@ -5926,7 +6031,7 @@ def runmode(self, device_id):
         &#34;&#34;&#34;
         if backend not in [&#39;cv2&#39;, &#39;pillow&#39;, &#39;ascend&#39;]:
             raise ValueError(f&#39;backend: {backend} is not supported. Supported &#34;backends are &#39;
-                            &#34;&#39;cv2&#39;, &#39;turbojpeg&#39;, &#39;pillow&#39;.&#34;)
+                            &#34;&#39;cv2&#39;, &#39;pillow&#39;, &#39;ascend&#39;.&#34;)
 
         if backend == &#39;cv2&#39;:
             try:
@@ -5943,21 +6048,31 @@ def runmode(self, device_id):
         if isinstance(img_or_path, Path):
             img_or_path = str(img_or_path)
 
-        if isinstance(img_or_path, np.ndarray):            
-            decode_img = self.imdecode(img_or_path)
-            return decode_img
+        if isinstance(img_or_path, np.ndarray): 
+            if keep_shape:           
+                decode_img, ori_shape = self.imdecode(img_or_path, return_shape=True)
+                return self.imcrop(decode_img, np.array([0, 0, ori_shape[1] - 1, ori_shape[0] - 1]))[0]
+            else:
+                return self.imdecode(img_or_path)
         elif is_str(img_or_path):
             check_file_exist(img_or_path, f&#39;img file does not exist: {img_or_path}&#39;)
             if backend == &#39;pillow&#39;:
                 img = Image.open(img_or_path)
                 img = _pillow2array(img, flag, channel_order)
                 return AscendArray.clone(img)
-            else:
+            elif backend == &#39;cv2&#39;:
                 flag = imread_flags[flag] if is_str(flag) else flag
                 img = cv2.imread(img_or_path, flag)
-                if flag == IMREAD_COLOR and channel_order == &#39;rgb&#39;:
+                if flag == cv2.IMREAD_COLOR and channel_order == &#39;rgb&#39;:
                     cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
                 return AscendArray.clone(img)
+            else:
+                array = np.fromfile(img_or_path, dtype=np.uint8)
+                if keep_shape:
+                    decode_img, ori_shape = self.imdecode(array, return_shape=True)
+                    return self.imcrop(decode_img, np.array([0, 0, ori_shape[1] - 1, ori_shape[0] - 1]))[0]
+                else:
+                    return self.imdecode(array)
         else:
             raise TypeError(&#39;&#34;img&#34; must be a numpy array or a str or a pathlib.Path object&#39;)
 
@@ -6047,7 +6162,7 @@ yuv_croped = Img.bbox_resize(img, bboxes, sizes)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L811-L922" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L850-L954" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bbox_resize(self, img, bboxes, sizes, inner_resize=True):
     &#34;&#34;&#34;Clip the bboxes image and resize to specified size.
@@ -6095,13 +6210,13 @@ yuv_croped = Img.bbox_resize(img, bboxes, sizes)
     # step 1: caculate the cliped bbox shape
     _bboxes = bboxes[None, ...] if bboxes.ndim == 1 else bboxes
     scaled_bboxes = bbox_scaling(_bboxes, 1.0).astype(np.int32)
-    clipped_bbox = bbox_clip(scaled_bboxes, img.shape)
+    clipped_bbox = _align_roi(scaled_bboxes, img)
 
     # align original image 
-    src_img, shape = align_img(img, func=&#39;crop&#39;)
+    src_img, shape = _align_img(img, func=&#39;crop&#39;)
 
     # step 2: input desc assembile, only process one image.
-    image_inst = PicDesc([src_img], img.shape[::-1])
+    image_inst = PicDesc([src_img], shape)
     roi_n_list = [clipped_bbox.shape[0]]
 
     # step 3: clip bboxes of image
@@ -6112,17 +6227,10 @@ yuv_croped = Img.bbox_resize(img, bboxes, sizes)
 
         # align w and h, and calc memory size of output box image
         if inner_resize:
-            dst_stride_w = aligned(_sizes[i][0], aligned=&#39;w&#39;)
-            dst_stride_h = aligned(_sizes[i][1], aligned=&#39;h&#39;)
+            dst_image = _create_align_img(_sizes[i][0], _sizes[i][1], format=img.format, func=&#39;crop&#39;)
         else:
-            dst_stride_w = aligned(x2 - x1, aligned=&#39;w&#39;)
-            dst_stride_h = aligned(y2 - y1, aligned=&#39;h&#39;)
-        dst_buf_size = calc_size(dst_stride_w, dst_stride_h, img.format)
-        
-        # create a bbox(a AscendArray object) and bind with dvpp memory
-        dst_image = AscendArray((dst_stride_w,), np.dtype(&#39;uint8&#39;), size=dst_buf_size, \
-                            format=img.format, flag=&#39;DVPP&#39;)
-        bboxes.append(dst_image.reshape(dst_image.shape[::-1]))
+            dst_image = _create_align_img(x2 - x1, y2 - y1, format=img.format, func=&#39;crop&#39;)
+        bboxes.append(dst_image)
 
         # create roi description
         roi_conf = acl.media.dvpp_create_roi_config(x1, x2, y1, y2)
@@ -6190,7 +6298,7 @@ yuv_croped = Img.imcrop(img, bboxes)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L713-L809" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L759-L848" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imcrop(self, img, bboxes, scale=1.0):
     &#34;&#34;&#34;Crop image patches, and resize bboxes.
@@ -6227,10 +6335,10 @@ yuv_croped = Img.imcrop(img, bboxes)
     # step 1: caculate the cliped bbox shape
     _bboxes = bboxes[None, ...] if bboxes.ndim == 1 else bboxes
     scaled_bboxes = bbox_scaling(_bboxes, scale).astype(np.int32)
-    clipped_bbox = bbox_clip(scaled_bboxes, img.shape)
-
+    clipped_bbox = _align_roi(scaled_bboxes, img)
+    
     # align original image
-    src_img, shape = align_img(img, func=&#39;crop&#39;)
+    src_img, shape = _align_img(img, func=&#39;crop&#39;)
 
     # step 2: input desc assembling, only process one image.
     image_inst = PicDesc([src_img], shape)
@@ -6241,15 +6349,9 @@ yuv_croped = Img.imcrop(img, bboxes)
     for i in range(clipped_bbox.shape[0]):
         x1, y1, x2, y2 = clipped_bbox[i, :].tolist()
         
-        # align w and h, and calc memory size of output box image
-        dst_stride_w = aligned(x2 - x1, aligned=&#39;w&#39;)
-        dst_stride_h = aligned(y2 - y1, aligned=&#39;h&#39;)
-        dst_buf_size = calc_size(dst_stride_w, dst_stride_h, img.format)
-        
         # create a bbox(a AscendArray object) and bind with dvpp memory
-        dst_image = AscendArray((dst_stride_w,), np.dtype(&#39;uint8&#39;), size=dst_buf_size, \
-                            format=img.format, flag=&#39;DVPP&#39;)
-        bboxes.append(dst_image.reshape(dst_image.shape[::-1]))
+        dst_image = _create_align_img(x2 - x1, y2 - y1, format=img.format, func=&#39;crop&#39;)
+        bboxes.append(dst_image)
 
         # create roi description
         roi_conf = acl.media.dvpp_create_roi_config(x1, x2, y1, y2)
@@ -6278,8 +6380,7 @@ yuv_croped = Img.imcrop(img, bboxes)
         assert ret == ACL_SUCCESS, \
             ValueError(f&#34;Failed to do dvpp_destroy_resize_config, return {ret}.&#34;)
 
-    del image_inst
-    del bboxes_inst
+    del image_inst, bboxes_inst
     Log(INFO, &#39;vpc crop process success&#39;)
 
     if not np.isclose(scale, 1.0, rtol=1e-2, atol=1e-03):
@@ -6323,7 +6424,7 @@ Img.imcrop_paste(yuv_src, yuv_dst, crop_bbox, paste_bbox)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L949-L1039" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L957-L1046" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imcrop_paste(self, src_img, dst_img, crop_bbox, paste_bbox):
     &#34;&#34;&#34;Crop a bbox from src image and paste the cropped bbox to dst image
@@ -6366,26 +6467,25 @@ Img.imcrop_paste(yuv_src, yuv_dst, crop_bbox, paste_bbox)
     if crop_bbox.shape[0] != paste_bbox.shape[0]:
         raise ValueError(f&#34;Input crop_bbox and paste_bbox should have same number bbox.&#34;)
 
-    # step 1: check input bbox, make startx and starty to even and endx and endy to odd
-    cbbox = self.__align_roi(crop_bbox, src_img.shape).tolist()
-    pbbox = self.__align_roi(paste_bbox, dst_img.shape).tolist()
+    # step 1: clip input bbox to fit image, make startx and starty to even and endx and endy to odd
+    cbbox = _align_roi(crop_bbox, src_img).tolist()
+    pbbox = _align_roi(paste_bbox, dst_img, is_paste=True).tolist()
 
     # step 2: align original image
-    crop_img, _ = align_img(src_img, func=&#39;crop&#39;)
-    paste_img, _ = align_img(dst_img, func=&#39;crop&#39;)
+    crop_img, shape_c = _align_img(src_img, func=&#39;crop&#39;)
+    paste_img, shape_p = _align_img(dst_img, func=&#39;crop&#39;)
 
     # step 3: create output image desc and bind it with a output AscendArray object
-    src_desc = PicDesc([crop_img], src_img.shape)
-    dst_desc = PicDesc([paste_img] * len(pbbox), dst_img.shape)
+    src_desc = PicDesc([crop_img], shape_c)
+    dst_desc = PicDesc([paste_img] * len(pbbox), shape_p)
 
     # step 4: startx of paste box aligned to 16 and append crop/paste roi to list
     crop_conf_list, past_conf_list = [], []
     for i in range(len(pbbox)):
-        pbbox[i][0] = aligned(pbbox[i][0], aligned=&#39;w&#39;)
-        cstartx, cendx, cstarty, cendy = cbbox[i][0], cbbox[i][2], cbbox[i][1], cbbox[i][3]
-        pstartx, pendx, pstarty, pendy = pbbox[i][0], pbbox[i][2], pbbox[i][1], pbbox[i][3]
-        crop_conf = acl.media.dvpp_create_roi_config(cstartx, cendx, cstarty, cendy)
-        past_conf = acl.media.dvpp_create_roi_config(pstartx, pendx, pstarty, pendy)
+        crop_conf = acl.media.dvpp_create_roi_config(
+            cbbox[i][0], cbbox[i][2], cbbox[i][1], cbbox[i][3])
+        past_conf = acl.media.dvpp_create_roi_config(
+            pbbox[i][0], pbbox[i][2], pbbox[i][1], pbbox[i][3])
         crop_conf_list.append(crop_conf)
         past_conf_list.append(past_conf)
 
@@ -6450,7 +6550,7 @@ image = Img.imdecode(data)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L265-L363" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L308-L406" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imdecode(self, array, format=PIXEL_FORMAT_YUV_SEMIPLANAR_420, return_shape=False):
     &#34;&#34;&#34; imdecode(array, format) -&gt; retval
@@ -6518,7 +6618,7 @@ image = Img.imdecode(data)
     # clone input image to device
     data = AscendArray.clone(array, context=self.context, flag=&#34;DVPP&#34;)
 
-    image = create_align_img(w, h, format=format, func=&#39;jpegd&#39; if decoder == &#39;jpg&#39; else &#39;pngd&#39;)
+    image = _create_align_img(w, h, format=format, func=&#39;jpegd&#39; if decoder == &#39;jpg&#39; else &#39;pngd&#39;)
 
     # create output image desc and bind it with a output AscendArray object
     pic_inst = PicDesc(image, (w, h))
@@ -6585,7 +6685,7 @@ str_encode = np.array(img_encode).tostring()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L366-L453" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L409-L496" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imencode(self, ext, img, params=None):
     &#34;&#34;&#34; Encodes an image into a memory buffer.
@@ -6628,7 +6728,7 @@ str_encode = np.array(img_encode).tostring()
     if self._channel_desc is None:
         raise ValueError(f&#34;channel desc is not initialized before imdecode.&#34;)
 
-    src_img, shape = align_img(img, func=&#39;encode&#39;)
+    src_img, shape = _align_img(img, func=&#39;encode&#39;)
 
     # create input image desc and bind it with a input AscendArray object
     src_inst = PicDesc(src_img, shape)
@@ -6701,7 +6801,7 @@ im_flip = Img.imflip(img, direction='horizontal')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L615-L648" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L661-L694" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imflip(self, img, direction=&#39;horizontal&#39;):
     &#34;&#34;&#34;Flip an image horizontally or vertically.
@@ -6780,7 +6880,7 @@ yuv_pad = Img.impad(img, padding=(20, 50, 100, 200), pad_val=128)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L1041-L1147" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L1048-L1153" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def impad(self, img, shape=None, padding=None, pad_val=0, padding_mode=&#39;constant&#39;):
     &#34;&#34;&#34;Pad the given image to a certain shape or pad on all sides with
@@ -6843,22 +6943,21 @@ yuv_pad = Img.impad(img, padding=(20, 50, 100, 200), pad_val=128)
                         f&#39;But received {padding}&#39;)
 
     # align original image shape and create a output to save padding result.
-    src_img, _ = align_img(img)
-    dst_w = padding[0] + w + padding[2]
-    dst_h = padding[1] + h + padding[3]
-    dst_img = create_align_img(dst_w, dst_h, format=img.format)
+    src_img, src_shape = _align_img(img)
+    dst_w, dst_h = padding[0] + w + padding[2], padding[1] + h + padding[3]
+    dst_img = _create_align_img(dst_w, dst_h, format=img.format)
 
     # set the padding result&#39;s memory with pad_val
     Memory.reset(dst_img.ascend_data, dst_img.nbytes, pad_val)
 
     # create output image desc and bind it with a output AscendArray object
-    src_desc = PicDesc(src_img, img.shape)
+    src_desc = PicDesc(src_img, src_shape)
     dst_desc = PicDesc(dst_img, (dst_h, dst_w))
 
     # paste area startx, starty, endx, endy, and align startx with 16
     startx = aligned(padding[0], aligned=&#39;w&#39;)
     starty = padding[1] &gt;&gt; 1 &lt;&lt; 1
-    endx = ((padding[0] + w) &gt;&gt; 1 &lt;&lt; 1) - 1
+    endx = ((startx + w) &gt;&gt; 1 &lt;&lt; 1) - 1
     endy = ((padding[1] + h) &gt;&gt; 1 &lt;&lt; 1) - 1
 
     # create roi description
@@ -6892,7 +6991,7 @@ yuv_pad = Img.impad(img, padding=(20, 50, 100, 200), pad_val=128)
 </details>
 </dd>
 <dt id="ascend.Image.imread"><code class="name flex">
-<span>def <span class="ident">imread</span></span>(<span>self, img_or_path, flag='color', channel_order='bgr', backend='ascend')</span>
+<span>def <span class="ident">imread</span></span>(<span>self, img_or_path, flag='color', channel_order='bgr', backend='ascend', keep_shape=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Read an image.</p>
@@ -6922,9 +7021,9 @@ yuv = Img.imread('./image.jpg')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L1149-L1205" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L1155-L1221" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">def imread(self, img_or_path, flag=&#39;color&#39;, channel_order=&#39;bgr&#39;, backend=&#39;ascend&#39;):
+<pre><code class="python">def imread(self, img_or_path, flag=&#39;color&#39;, channel_order=&#39;bgr&#39;, backend=&#39;ascend&#39;, keep_shape=False):
     &#34;&#34;&#34;Read an image.
 
     Args:
@@ -6947,7 +7046,7 @@ yuv = Img.imread('./image.jpg')
     &#34;&#34;&#34;
     if backend not in [&#39;cv2&#39;, &#39;pillow&#39;, &#39;ascend&#39;]:
         raise ValueError(f&#39;backend: {backend} is not supported. Supported &#34;backends are &#39;
-                        &#34;&#39;cv2&#39;, &#39;turbojpeg&#39;, &#39;pillow&#39;.&#34;)
+                        &#34;&#39;cv2&#39;, &#39;pillow&#39;, &#39;ascend&#39;.&#34;)
 
     if backend == &#39;cv2&#39;:
         try:
@@ -6964,21 +7063,31 @@ yuv = Img.imread('./image.jpg')
     if isinstance(img_or_path, Path):
         img_or_path = str(img_or_path)
 
-    if isinstance(img_or_path, np.ndarray):            
-        decode_img = self.imdecode(img_or_path)
-        return decode_img
+    if isinstance(img_or_path, np.ndarray): 
+        if keep_shape:           
+            decode_img, ori_shape = self.imdecode(img_or_path, return_shape=True)
+            return self.imcrop(decode_img, np.array([0, 0, ori_shape[1] - 1, ori_shape[0] - 1]))[0]
+        else:
+            return self.imdecode(img_or_path)
     elif is_str(img_or_path):
         check_file_exist(img_or_path, f&#39;img file does not exist: {img_or_path}&#39;)
         if backend == &#39;pillow&#39;:
             img = Image.open(img_or_path)
             img = _pillow2array(img, flag, channel_order)
             return AscendArray.clone(img)
-        else:
+        elif backend == &#39;cv2&#39;:
             flag = imread_flags[flag] if is_str(flag) else flag
             img = cv2.imread(img_or_path, flag)
-            if flag == IMREAD_COLOR and channel_order == &#39;rgb&#39;:
+            if flag == cv2.IMREAD_COLOR and channel_order == &#39;rgb&#39;:
                 cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
             return AscendArray.clone(img)
+        else:
+            array = np.fromfile(img_or_path, dtype=np.uint8)
+            if keep_shape:
+                decode_img, ori_shape = self.imdecode(array, return_shape=True)
+                return self.imcrop(decode_img, np.array([0, 0, ori_shape[1] - 1, ori_shape[0] - 1]))[0]
+            else:
+                return self.imdecode(array)
     else:
         raise TypeError(&#39;&#34;img&#34; must be a numpy array or a str or a pathlib.Path object&#39;)</code></pre>
 </details>
@@ -7015,7 +7124,7 @@ yuv_rescale2 = Img.imrescale(yuv, (320, 540))
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L554-L613" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L600-L659" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imrescale(self, img, scale, interpolation=&#39;huawei&#39;, return_shape=False):
     &#34;&#34;&#34;Resize image while keeping the aspect ratio.
@@ -7117,7 +7226,7 @@ imresize(img, (w//2, h//2), interpolation)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L456-L551" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L499-L597" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imresize(self, img, dsize, interpolation=&#39;huawei&#39;):
     &#34;&#34;&#34;imresize(array, img, dsize, interpolation=&#39;huawei&#39;) -&gt; retval
@@ -7179,12 +7288,15 @@ imresize(img, (w//2, h//2), interpolation)
         raise ValueError(f&#34;channel desc is not initialized before imdecode.&#34;)
 
     # do image aligned and create aligned image to save resized image
-    src_img, shape = align_img(img, func=&#39;resize&#39;)
-    dst_img = create_align_img(dsize[0], dsize[1], format=img.format, func=&#39;resize&#39;)
+    src_img, shape = _align_img(img, func=&#39;resize&#39;)
+    dst_img = _create_align_img(dsize[0], dsize[1], format=img.format, func=&#39;resize&#39;)
 
     # create output image desc and bind it with a output AscendArray object
+    # warning: The dst_inst must defined as dst_inst = PicDesc(dst_img), not to be
+    #          define as dst_inst = PicDesc(dst_img, dsize), otherwise, the dst image&#39;s
+    #          last lines will filled with random colors(value).
     src_inst = PicDesc(src_img, shape)
-    dst_inst = PicDesc(dst_img, dsize)
+    dst_inst = PicDesc(dst_img)
 
     # create resize config
     resize_conf = acl.media.dvpp_create_resize_config()
@@ -7249,7 +7361,7 @@ rotated image.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L651-L710" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L697-L756" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imrotate(self, 
             img,
@@ -7343,7 +7455,7 @@ Img.imwrite(yuv_org, './saved_img.jpg')
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/image/geome.py#L1208-L1248" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/image/geome.py#L1224-L1264" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imwrite(self, img, file_path, params=None, auto_mkdir=True):
     &#34;&#34;&#34;Write image to file.
@@ -7406,7 +7518,7 @@ out : return output result</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L37-L186" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/blas.py#L37-L186" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Matmul():
     &#34;&#34;&#34; define a Matmul object, release the function .
@@ -7571,7 +7683,7 @@ out : return output result</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L155-L164" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/blas.py#L155-L164" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def out(self):
@@ -7600,7 +7712,7 @@ def out(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L166-L178" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/blas.py#L166-L178" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def free_ab(self):
     &#34;&#34;&#34; free alpha and beta data memory
@@ -7629,7 +7741,7 @@ def out(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L126-L153" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/blas.py#L126-L153" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -7685,7 +7797,7 @@ print(mem.ptr)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L118-L204" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L118-L204" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Memory():
     &#34;&#34;&#34;Define a Memory class to manage memory of device host and dvpp.
@@ -7798,7 +7910,7 @@ ascend.Memory.reset(dst_img.ascend_data, dst_img.nbytes, pad_val)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L150-L177" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L150-L177" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@classmethod
 def reset(self, ptr, size, value):
@@ -7852,7 +7964,7 @@ mem_info = mem.mem_info(0)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L179-L200" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L179-L200" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def mem_info(self, attr):
     &#34;&#34;&#34;Get the memory info accoring to attribute att.
@@ -7901,7 +8013,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L305-L406" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L305-L406" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Permute():
     &#34;&#34;&#34; define a Permute operator object to permute the dimensions. 
@@ -8014,7 +8126,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L392-L394" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L392-L394" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def data(self):
@@ -8036,7 +8148,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L368-L390" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L368-L390" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -8082,13 +8194,11 @@ It define a decorator running in model infer</p>
 <h2 id="methods">Methods</h2>
 <ul>
 <li>profiling(func): do model profiling.</li>
-<li>elapse_time(func): do function timling</li>
 <li>info_print(sort=False): log infomation of profiling.</li>
 </ul>
 <p>Typical usage example:</p>
 <pre><code class="language-python">prof = ascend.Profiling(ctx, model.model_id)
 
-@prof.elapse_time
 @prof.profiling
 def run():
     model.run()
@@ -8098,7 +8208,7 @@ run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L26-L248" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L26-L224" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Profiling():
     &#34;&#34;&#34;Define a Profiling class to do profiling and finetune model.
@@ -8110,14 +8220,12 @@ run()
 
     Methods:
         - profiling(func): do model profiling.
-        - elapse_time(func): do function timling
         - info_print(sort=False): log infomation of profiling.
 
     Typical usage example:
     ```python
     prof = ascend.Profiling(ctx, model.model_id)
 
-    @prof.elapse_time
     @prof.profiling
     def run():
         model.run()
@@ -8278,28 +8386,6 @@ run()
 
         return wrapped_function
 
-    def elapse_time(self, func):
-        &#34;&#34;&#34;Print function excute time.
-
-        Args:
-            func (obj): The runing function.
-
-        Returns:
-            wrapped_function
-        &#34;&#34;&#34;        
-        @wraps(func)
-        def wrapped_function(*args, **kwargs):
-            print(func.__name__ + &#34; was called, and start time.&#34;)
-            
-            start_time = time.time()
-            res = func(*args, **kwargs)
-            use_time = time.time() - start_time
-
-            print(f&#34;{func.__name__} elapse time:{use_time}&#34;)
-            return res
-        return wrapped_function
-
-
     def __exit__(self, exc_type, exc_value, traceback):
         &#34;&#34;&#34; unsubscribe thread and destroy subscribe config.
 
@@ -8326,45 +8412,6 @@ run()
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="ascend.Profiling.elapse_time"><code class="name flex">
-<span>def <span class="ident">elapse_time</span></span>(<span>self, func)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>Print function excute time.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>func</code></strong> :&ensp;<code>obj</code></dt>
-<dd>The runing function.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<p>wrapped_function</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L204-L223" class="git-link">Browse git</a>
-</summary>
-<pre><code class="python">def elapse_time(self, func):
-    &#34;&#34;&#34;Print function excute time.
-
-    Args:
-        func (obj): The runing function.
-
-    Returns:
-        wrapped_function
-    &#34;&#34;&#34;        
-    @wraps(func)
-    def wrapped_function(*args, **kwargs):
-        print(func.__name__ + &#34; was called, and start time.&#34;)
-        
-        start_time = time.time()
-        res = func(*args, **kwargs)
-        use_time = time.time() - start_time
-
-        print(f&#34;{func.__name__} elapse time:{use_time}&#34;)
-        return res
-    return wrapped_function</code></pre>
-</details>
-</dd>
 <dt id="ascend.Profiling.info_print"><code class="name flex">
 <span>def <span class="ident">info_print</span></span>(<span>self, sort=False)</span>
 </code></dt>
@@ -8381,7 +8428,7 @@ run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L123-L144" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L121-L142" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def info_print(self, sort=False):
     &#34;&#34;&#34;Print profiling info to terminal
@@ -8422,7 +8469,7 @@ run()
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/profiling/profiling.py#L181-L202" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/profiling/profiling.py#L179-L200" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def profiling(self, func):
     &#34;&#34;&#34;Start profiling thread and do profiling.
@@ -8475,7 +8522,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L207-L300" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L207-L300" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Transpose():
     &#34;&#34;&#34; define a Transpose operator object to release Transpose. Permutes the dimensions according to perm. 
@@ -8580,7 +8627,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L286-L288" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L286-L288" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def data(self):
@@ -8602,7 +8649,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/op.py#L262-L284" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/op.py#L262-L284" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -8640,7 +8687,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L29-L422" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L29-L423" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Vdec():
     def __init__(self, 
@@ -8731,13 +8778,14 @@ def data(self):
                 Log(WARNING, f&#39;buffer queue {self.image.queue()} is almost full.&#39;)
 
             ret = acl.media.dvpp_get_pic_desc_ret_code(output_pic_desc)
+            size = acl.media.dvpp_get_pic_desc_size(output_pic_desc)
+            buffer = acl.media.dvpp_get_pic_desc_data(output_pic_desc)
+            align_w = acl.media.dvpp_get_pic_desc_width_stride(output_pic_desc)
             if ret != ACL_SUCCESS:
+                if buffer:
+                    acl.media.dvpp_free(buffer)
                 Log(WARNING, f&#39;image decode error, return {ret}.&#39;)
             else:
-                size = acl.media.dvpp_get_pic_desc_size(output_pic_desc)
-                buffer = acl.media.dvpp_get_pic_desc_data(output_pic_desc)
-                align_w = acl.media.dvpp_get_pic_desc_width_stride(output_pic_desc)
-
                 frame_id = user_data[0]
                 yuv_image = AscendArray((align_w,), np.dtype(&#39;uint8&#39;), size=size, buffer=buffer,\
                                          format=self._format, flag=&#39;DEVICE&#39;)
@@ -9045,7 +9093,7 @@ def data(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L375-L378" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L376-L379" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def bit_depth(self):
@@ -9059,7 +9107,7 @@ def bit_depth(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L296-L298" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L297-L299" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def channel_id(self):
@@ -9072,7 +9120,7 @@ def channel_id(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L315-L317" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L316-L318" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def encoder_type(self):
@@ -9085,7 +9133,7 @@ def encoder_type(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L356-L360" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L357-L361" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def out_mode(self):
@@ -9100,7 +9148,7 @@ def out_mode(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L335-L337" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L336-L338" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def pic_format(self):
@@ -9113,7 +9161,7 @@ def pic_format(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L285-L287" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L286-L288" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def queue_size(self):
@@ -9126,7 +9174,7 @@ def queue_size(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L351-L354" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L352-L355" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def ref_num(self):
@@ -9149,7 +9197,7 @@ def ref_num(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L272-L282" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L273-L283" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def finish(self):
     &#34;&#34;&#34; finish bind thread working. 
@@ -9176,7 +9224,7 @@ def ref_num(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L240-L270" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L241-L271" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def process(self, frame):
     &#34;&#34;&#34;Read one packet frame from caputure in host and send to dvpp.
@@ -9247,7 +9295,7 @@ def ref_num(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L66-L474" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L66-L474" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Venc():
     &#34;&#34;&#34;Define a Venc class to encode the frame using dvpp.
@@ -9667,7 +9715,7 @@ def ref_num(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L445-L448" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L445-L448" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def bit_rate(self):
@@ -9681,7 +9729,7 @@ def bit_rate(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L355-L357" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L355-L357" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def encoder_type(self):
@@ -9694,7 +9742,7 @@ def encoder_type(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L408-L411" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L408-L411" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def fps(self):
@@ -9708,7 +9756,7 @@ def fps(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L391-L393" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L391-L393" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def frame_itval(self):
@@ -9721,7 +9769,7 @@ def frame_itval(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L341-L344" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L341-L344" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def height(self):
@@ -9735,7 +9783,7 @@ def height(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L375-L377" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L375-L377" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def pic_format(self):
@@ -9748,7 +9796,7 @@ def pic_format(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L428-L431" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L428-L431" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def rc_mode(self):
@@ -9762,7 +9810,7 @@ def rc_mode(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L327-L330" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L327-L330" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def width(self):
@@ -9792,7 +9840,7 @@ def width(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L262-L296" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L262-L296" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def finish(self):
     &#34;&#34;&#34; create a eos stream desc and set it to vdec.
@@ -9843,7 +9891,7 @@ def width(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/venc.py#L299-L325" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/venc.py#L299-L325" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def process(self, frame):
     &#34;&#34;&#34;Assemble one frame and send to video encoder
@@ -9940,7 +9988,7 @@ rtsp ip camera. </p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L38-L394" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L38-L395" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class VideoCapture():
     &#34;&#34;&#34;Define a VideoCaputure class to get the stream and parser packet. It also include method to push 
@@ -9989,8 +10037,9 @@ rtsp ip camera. </p>
         self.context = context
         self._status = Status.IDLE
 
-        # open video container
-        self.container = av.open(av.datasets.curated(stream_path))
+        # open video container        
+        dicOption={&#39;buffer_size&#39;:&#39;1024000&#39;, &#39;rtsp_transport&#39;:&#39;tcp&#39;, &#39;stimeout&#39;:&#39;20000000&#39;, &#39;max_delay&#39;:&#39;200000&#39;}
+        self.container = av.open(stream_path, &#39;r&#39;, format=None, options=dicOption, metadata_errors=&#39;nostrict&#39;)
 
         # only use video stream
         self.stream = self.container.streams.video[0]
@@ -10308,7 +10357,7 @@ rtsp ip camera. </p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L145-L147" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L146-L148" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def coded_height(self):
@@ -10321,7 +10370,7 @@ def coded_height(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L149-L151" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L150-L152" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def coded_width(self):
@@ -10338,7 +10387,7 @@ like Fraction(16, 9).</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L153-L160" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L154-L161" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def display_aspect_ratio(self):
@@ -10360,7 +10409,7 @@ return an av.VideoFormat object.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L162-L169" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L163-L170" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def format(self):
@@ -10378,7 +10427,7 @@ def format(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L175-L177" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L176-L178" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def fps(self):
@@ -10391,7 +10440,7 @@ def fps(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L171-L173" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L172-L174" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def framerate(self):
@@ -10404,7 +10453,7 @@ def framerate(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L187-L189" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L188-L190" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def frames(self):
@@ -10417,7 +10466,7 @@ def frames(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L179-L181" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L180-L182" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def has_b_frames(self):
@@ -10430,7 +10479,7 @@ def has_b_frames(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L141-L143" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L142-L144" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def height(self):
@@ -10443,7 +10492,7 @@ def height(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L183-L185" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L184-L186" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def pix_fmt(self):
@@ -10456,7 +10505,7 @@ def pix_fmt(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L137-L139" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L138-L140" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def width(self):
@@ -10486,7 +10535,7 @@ property that is not supported by the backend used by the VideoCapture instance.
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L352-L380" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L353-L381" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get(self, attr):   
     &#34;&#34;&#34; get(attr) -&gt; retval
@@ -10550,7 +10599,7 @@ Status END   | end of push packet to the vdec, and pop image data until the
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L219-L296" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L220-L297" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def is_open(self):
     &#34;&#34;&#34;Open the video capture and ready to decode.
@@ -10651,7 +10700,7 @@ it will be raise an timeout error.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L299-L317" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L300-L318" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def read(self, print_status=True):     
     &#34;&#34;&#34;Read one frame from caputure in device. If we cann&#39;t get the data in the timeout, 
@@ -10682,7 +10731,7 @@ it will be raise an timeout error.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L382-L391" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L383-L392" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def release(self):
     &#34;&#34;&#34;Closes video file or capturing device and release resource.
@@ -10717,7 +10766,7 @@ Sets a property in the VideoCapture</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L319-L350" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L320-L351" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def set(self, attr, value):
     &#34;&#34;&#34;set(attr, value) -&gt; retval
@@ -10778,7 +10827,7 @@ ALL           | 0x30       | Discard all
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_capture.py#L191-L216" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_capture.py#L192-L217" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def skip_frame(self, skip_type):
     &#34;&#34;&#34;Signal that we only want to look at frames, only work in ffmpeg.
@@ -10852,7 +10901,7 @@ ALL           | 0x30       | Discard all
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L35-L237" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L35-L237" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class VideoWriter():
     &#34;&#34;&#34;Define a VideoWriter class to encode video stream with format h264/265.
@@ -11066,7 +11115,7 @@ ALL           | 0x30       | Discard all
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L108-L110" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L108-L110" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def fps(self):
@@ -11079,7 +11128,7 @@ def fps(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L96-L98" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L96-L98" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def height(self):
@@ -11092,7 +11141,7 @@ def height(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L120-L122" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L120-L122" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def pix_fmt(self):
@@ -11105,7 +11154,7 @@ def pix_fmt(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L84-L86" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L84-L86" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def width(self):
@@ -11135,7 +11184,7 @@ property that is not supported by the backend used by the VideoWriter instance.<
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L188-L215" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L188-L215" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def get(self, attr):
     &#34;&#34;&#34; get(attr) -&gt; retval
@@ -11175,7 +11224,7 @@ property that is not supported by the backend used by the VideoWriter instance.<
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L217-L233" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L217-L233" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def release(self):
     &#34;&#34;&#34;Closes video file or writer and release resource.
@@ -11217,7 +11266,7 @@ Sets a property in the VideoWriter</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L153-L186" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L153-L186" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def set(self, attr, value):
     &#34;&#34;&#34; set(attr, value) -&gt; retval
@@ -11269,7 +11318,7 @@ been specified when opening the video writer.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/video_writer.py#L133-L151" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/video_writer.py#L133-L151" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def write(self, image):
     &#34;&#34;&#34;The function/method writes the specified image to video file. It must have the same size as has
@@ -11312,7 +11361,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L190-L339" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/blas.py#L190-L339" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Vmul():
     &#34;&#34;&#34;Define a vector multiply object, release the function .
@@ -11477,7 +11526,7 @@ out
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L308-L317" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/blas.py#L308-L317" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def out(self):
@@ -11506,7 +11555,7 @@ def out(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/ops/blas.py#L279-L306" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/ops/blas.py#L279-L306" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run(self):
     &#34;&#34;&#34; run op.
@@ -11584,6 +11633,8 @@ data-gaCategoryParameter="ascend">
 <li><code><a title="ascend.color_val" href="#ascend.color_val">color_val</a></code></li>
 <li><code><a title="ascend.create_stream" href="#ascend.create_stream">create_stream</a></code></li>
 <li><code><a title="ascend.device_num" href="#ascend.device_num">device_num</a></code></li>
+<li><code><a title="ascend.draw_bboxes" href="#ascend.draw_bboxes">draw_bboxes</a></code></li>
+<li><code><a title="ascend.elapse_time" href="#ascend.elapse_time">elapse_time</a></code></li>
 <li><code><a title="ascend.get_classes" href="#ascend.get_classes">get_classes</a></code></li>
 <li><code><a title="ascend.imagenet_det_classes" href="#ascend.imagenet_det_classes">imagenet_det_classes</a></code></li>
 <li><code><a title="ascend.imagenet_vid_classes" href="#ascend.imagenet_vid_classes">imagenet_vid_classes</a></code></li>
@@ -11725,7 +11776,6 @@ data-gaCategoryParameter="ascend">
 <li>
 <h4><code><a title="ascend.Profiling" href="#ascend.Profiling">Profiling</a></code></h4>
 <ul class="">
-<li><code><a title="ascend.Profiling.elapse_time" href="#ascend.Profiling.elapse_time">elapse_time</a></code></li>
 <li><code><a title="ascend.Profiling.info_print" href="#ascend.Profiling.info_print">info_print</a></code></li>
 <li><code><a title="ascend.Profiling.profiling" href="#ascend.Profiling.profiling">profiling</a></code></li>
 </ul>
