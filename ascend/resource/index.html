@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/__init__.py#L0-L8" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/__init__.py#L0-L8" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">from .context import Context
 from .context import (bind_context, create_stream, acl_vesion, run_mode,
@@ -89,7 +89,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L21-L38" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L21-L38" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def acl_vesion(self):
     &#34;&#34;&#34; get acl version of system intalled. 
@@ -126,7 +126,7 @@ Typical usage example:</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L114-L136" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L118-L140" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bind_context(context):
     &#34;&#34;&#34; Binding an existing context. If context is not exist, raise an error else set this context.
@@ -154,14 +154,15 @@ Typical usage example:</p>
 </details>
 </dd>
 <dt id="ascend.resource.create_stream"><code class="name flex">
-<span>def <span class="ident">create_stream</span></span>(<span>context=None)</span>
+<span>def <span class="ident">create_stream</span></span>(<span>context=None, stream=None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>create a stream. </p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>case 1. context is None. Get the context and create a new stream.
-case 2. context is not None. Create a new stream on existing context.</p>
+<p>case 1. stream is not None, return stream.
+case 2. stream and context are None. Get the context and create a new stream.
+case 3. stream is None and context is not None. Create a new stream on existing context.</p>
 </div>
 <h2 id="args">Args</h2>
 <dl>
@@ -176,14 +177,15 @@ case 2. context is not None. Create a new stream on existing context.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L85-L111" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L85-L115" class="git-link">Browse git</a>
 </summary>
-<pre><code class="python">def create_stream(context=None):
+<pre><code class="python">def create_stream(context=None, stream=None):
     &#34;&#34;&#34; create a stream. 
 
     .. note::
-       case 1. context is None. Get the context and create a new stream.
-       case 2. context is not None. Create a new stream on existing context.
+       case 1. stream is not None, return stream.
+       case 2. stream and context are None. Get the context and create a new stream.
+       case 3. stream is None and context is not None. Create a new stream on existing context.
 
     Args:
         context (int): If context is None, it will get context and then create a stream.
@@ -191,6 +193,9 @@ case 2. context is not None. Create a new stream on existing context.</p>
     Returns:
         [int]: The created stream or original
     &#34;&#34;&#34;
+    if stream:
+        return stream
+
     if context is None:
         context, ret = acl.rt.get_context()
         assert ret == ACL_SUCCESS, f&#34;get context failed in bind_stream, return {ret}.&#34;
@@ -225,7 +230,7 @@ case 2. context is not None. Create a new stream on existing context.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L64-L82" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L64-L82" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def device_num():
     &#34;&#34;&#34;Get device number of the system
@@ -271,7 +276,7 @@ Typical usage example:</li>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L40-L61" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L40-L61" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def run_mode():
     &#34;&#34;&#34; get run mode of Ascend310. 
@@ -350,7 +355,7 @@ for ctx in Context({0, 1}):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L139-L390" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L143-L394" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Context():
     &#34;&#34;&#34;Define a Context class to manage context of device.
@@ -449,7 +454,7 @@ for ctx in Context({0, 1}):
 
         # below we not sure this method is better
         assert sorted(devices)[0] &gt;= 0 and sorted(devices)[-1] &lt; self.device_num, \
-            f&#34;Device id {device_id} is out of range [0, {self.device_num}).&#34;
+            f&#34;Device id {devices} is out of range [0, {self.device_num}).&#34;
    
 
     def __init_resource(self, acl_json=None):
@@ -625,7 +630,7 @@ for ctx in Context({0, 1}):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L278-L304" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L282-L308" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@classmethod
 def runmode(self, device_id):
@@ -676,7 +681,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L319-L346" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L323-L350" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def bind_device(self, device_id):
     &#34;&#34;&#34;Bind device resource according to device_id.
@@ -716,7 +721,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L361-L364" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L365-L368" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def context_add(self):
     &#34;&#34;&#34;Not release yet
@@ -742,7 +747,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L306-L316" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L310-L320" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def current_context(self, devnum=None):
     &#34;&#34;&#34;Get the context working on
@@ -770,7 +775,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L348-L354" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L352-L358" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def device_available(self):
     &#34;&#34;&#34;Judge the device is available or not
@@ -789,7 +794,7 @@ def runmode(self, device_id):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/context.py#L356-L359" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/context.py#L360-L363" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def stream_add(self):
     &#34;&#34;&#34;Not release yet
@@ -821,7 +826,7 @@ print(mem.ptr)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L118-L204" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L118-L204" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Memory():
     &#34;&#34;&#34;Define a Memory class to manage memory of device host and dvpp.
@@ -934,7 +939,7 @@ ascend.Memory.reset(dst_img.ascend_data, dst_img.nbytes, pad_val)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L150-L177" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L150-L177" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@classmethod
 def reset(self, ptr, size, value):
@@ -988,7 +993,7 @@ mem_info = mem.mem_info(0)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L179-L200" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L179-L200" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def mem_info(self, attr):
     &#34;&#34;&#34;Get the memory info accoring to attribute att.

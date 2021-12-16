@@ -46,7 +46,7 @@ limitations under the License.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L0-L206" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L0-L206" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -276,7 +276,7 @@ class Memory():
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L42-L56" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L42-L56" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def free(ptr, flag):
     &#34;&#34;&#34;Free memoy at point ptr.
@@ -315,7 +315,7 @@ class Memory():
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L20-L40" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L20-L40" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def malloc(size, flag):
     &#34;&#34;&#34;Malloc memory according to flag.
@@ -362,7 +362,7 @@ class Memory():
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L58-L94" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L58-L94" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def mem_copy(dst_ptr, src_ptr, size, method):
     &#34;&#34;&#34;Copy memory from source to destination.
@@ -411,7 +411,7 @@ class Memory():
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L106-L109" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L106-L109" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def memcpy_d2d(dst_ptr, src_ptr, size):
     &#34;&#34;&#34;Same to function `mem_copy` with method `&#39;device_to_device&#39;`
@@ -427,7 +427,7 @@ class Memory():
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L101-L104" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L101-L104" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def memcpy_d2h(dst_ptr, src_ptr, size):
     &#34;&#34;&#34;Same to function `mem_copy` with method `&#39;device_to_host&#39;`
@@ -443,7 +443,7 @@ class Memory():
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L96-L99" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L96-L99" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def memcpy_h2d(dst_ptr, src_ptr, size):
     &#34;&#34;&#34;Same to function `mem_copy` with method `&#39;host_to_device&#39;`
@@ -459,7 +459,7 @@ class Memory():
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L111-L114" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L111-L114" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def memcpy_h2h(dst_ptr, src_ptr, size):
     &#34;&#34;&#34;Same to function `mem_copy` with method `&#39;host_to_host&#39;`
@@ -494,7 +494,7 @@ print(mem.ptr)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L118-L204" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L118-L204" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Memory():
     &#34;&#34;&#34;Define a Memory class to manage memory of device host and dvpp.
@@ -607,7 +607,7 @@ ascend.Memory.reset(dst_img.ascend_data, dst_img.nbytes, pad_val)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L150-L177" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L150-L177" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@classmethod
 def reset(self, ptr, size, value):
@@ -661,7 +661,7 @@ mem_info = mem.mem_info(0)
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/resource/mem.py#L179-L200" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/resource/mem.py#L179-L200" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def mem_info(self, attr):
     &#34;&#34;&#34;Get the memory info accoring to attribute att.
