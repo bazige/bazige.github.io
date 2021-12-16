@@ -1,4 +1,4 @@
-![](./ascend/logo/ascendfly.png)
+# Ascendfly
 
 ## 1 简介
 
@@ -50,7 +50,9 @@ Ascendfly系统级封装主要包括以下模块（module）。
    模块封装了Profiling类可以更简单的实现算子、模型性能调优，可以直观地显示各算子执行耗时并加以排序。
 
 整体系统设计如下图所示：
-![](./ascend/logo/ascendfly_graph.png)
+
+![输入图片说明](./ascend/logo/ascendfly_graph.png)
+
 
 
 ## 2 环境依赖及安装指导
@@ -107,6 +109,13 @@ pip install ascendfly
 
    python3.7.5 setup.py install
 
+
+### 2.5 pyav手动安装
+部分平台，会由于**pyav**自动安装缺少`libavformat`、`libavcodec`等依赖导致pyav安装失败，从而导致ascendfly安装失败，这时需要手动安装**pyav**以及`libavformat`、`libavcodec`等依赖。
+由于安装过程可能会涉及ffmpeg版本问题，过程比较复杂，请参考附录[4.2 pyav手动安装](#4.2 pyav手动安装)
+
+
+
 ## 3 使用指导
 
 ### 3.1 使用约束
@@ -155,3 +164,89 @@ python3.7.5 yolov3_caffe_demo.py
 ## 4 附录
 ### 4.1 Ascendfly API
 请参考[API doc](./ascend/index.html)。
+
+### 4.2 pyav手动安装
+pyav自动安装失败，缺少`libavformat`、`libavcodec`等依赖的`ERROR`错误时，可参考如下步骤手动安装**pyav**。
+![输入图片说明](./ascend/logo/ascendfly_error1.png)
+
+- **步骤 1** 安装`libavformat`、`libavcodec`、`libavdevice`、`libavutil`、`libavfilter`、`libswscale`、`libswresample`：
+   
+   ```shell
+   apt-get install -y python-dev python-virtualenv pkg-config
+   apt-get install -y \
+      libavformat-dev libavcodec-dev libavdevice-dev \
+      libavutil-dev libswscale-dev libavresample-dev
+   ```
+   如果使用`pip3 install av`可以成功，**后续步骤跳过**。如果出现以下错误，则说明pip3尝试安装的`ffmpeg版本<4.x`的。
+   ![输入图片说明](./ascend/logo/ascendfly_error2.png)
+   或
+   ![输入图片说明](./ascend/logo/ascendfly_error3.png)
+   
+   以上错误这说明`libavcodec-dev`等包的版本太低, 所以需要安装`ffmpeg`以及更新其他依赖来解决这个问题，可以参考issue：[Rob Savouy's PPA](https://github.com/aiortc/aiortc/issues/326)和[Docker install of aiortc](https://github.com/aiortc/aiortc/issues/327), 或者参考后续步骤。
+   
+   ```shell
+   //检查apt中libavformat、libavcodec、libavdevice、libavutil、libavfilter、libswscale、libswresample版本
+   apt-cache madison ffmpeg
+   apt-cache madison libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev
+   ```
+   
+- **步骤 2** 更新`ffmpeg`和`av`依赖源，安装`software-properties-common`。
+   
+   ```shell
+   apt-get update && apt-get install -y software-properties-common
+   ```
+   
+- **步骤 3** 先添加**PPA**的源，然后通过**PPA**单独安装`ffmpeg`以及`libavcodec`等。
+   
+   1. **方法1**：对于Ubuntu18.04，添加`deb http://ppa.launchpad.net/savoury1/ffmpeg4/ubuntu bionic main `，[参考链接](https://launchpad.net/~savoury1/+archive/ubuntu/ffmpeg4)
+   
+      ```shell
+      vim /etc/apt/sources.list
+      ```
+   
+      ![输入图片说明](./ascend/logo/ascendfly_sourcelist.png)
+   
+   2. **方法2**：命令方式
+   
+      ```shell
+      add-apt-repository ppa:jonathonf/ffmpeg-4
+      apt-get update && apt-get upgrade -y
+      ```
+   
+   如果`apt-get update`出现以下错误，
+   
+   ![输入图片说明](./ascend/logo/ascendfly_error4.png)
+   
+   解决方法是：
+   
+   ```shell
+   gpg --keyserver keyserver.ubuntu.com --recv 5523BAEEB01FA116 //(这个公钥是上述报错的提示)
+   gpg --export --armor 5523BAEEB01FA116 | sudo apt-key add -
+   ```
+   然后再执行以下命令更新源：
+   ```shell
+   apt-get update && apt-get upgrade -y
+   apt update && apt upgrade
+   ```
+   
+- **步骤 4** 查看`ffmpeg`和`libavformat`等版本
+   
+   ```shell
+   apt-cache madison ffmpeg
+   apt-cache madison libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev
+   ```
+   此时`ffmpeg`以及`libavformat`已经有**4.x**的版本
+   ![输入图片说明](./ascend/logo/ascendfly_version1.png)
+   
+- **步骤 5** 安装和更新libavformat等依赖：
+   
+   ```shell
+   apt-get install --update libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev
+   ```
+   
+- **步骤 6** 安装pyav
+   
+   ```shell
+   pip3 install av
+   ```
+   ![输入图片说明](./ascend/logo/ascendfly_install_av.png)
