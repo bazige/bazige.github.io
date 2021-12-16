@@ -34,14 +34,14 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L0-L235" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L0-L292" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># Copyright (c) Open-MMLab. All rights reserved.
 import cv2
 import numpy as np
 
 from ..common.const import *
-from .color import color_val
+from .color import color_val, COLORS_81
 
 def trans_numpy(img):
     &#34;&#34;&#34;Trans AscendArray img to np.ndrray with rgb/bgr format.
@@ -271,6 +271,63 @@ def imshow_bboxes_colors(img,
         imshow(img, win_name, wait_time)
     if out_file is not None:
         cv2.imwrite(out_file, img)
+    return img
+
+
+def draw_bboxes(img,
+                bboxes,
+                class_names,
+                thickness=1,
+                font_scale=0.5,
+                show=True,
+                win_name=&#39;&#39;,
+                wait_time=0,
+                out_file=None):
+    &#34;&#34;&#34;Draw bboxes and class labels (with scores) on an image with colors.
+
+    Args:
+        img (AscendArray, ndarray): The image to be displayed.
+        bboxes (ndarray): Bounding boxes (with scores, label), shaped (n, 5) or (n, 6).
+            shape like [x1, y1, x2, y2, scores, classid] or [x1, y1, x2, y2, classid]
+
+        class_names (list[str]): Names of each classes.
+        thickness (int): Thickness of lines.
+        font_scale (float): Font scales of texts.
+        show (bool): Whether to show the image.
+        win_name (str): The window name.
+        wait_time (int): Value of waitKey param.
+        out_file (str or None): The filename to write the image.
+
+    Returns:
+        ndarray: The image with bboxes drawn on it.
+    &#34;&#34;&#34;
+    assert bboxes.ndim == 2
+    assert bboxes.shape[1] == 5 or bboxes.shape[1] == 6
+    img = trans_numpy(img)
+
+    img = np.ascontiguousarray(img).astype(np.uint8)  # 可能传入的不是uint8
+    font = cv2.FONT_HERSHEY_DUPLEX
+
+    for bbox, label in zip(bboxes[:,:5], bboxes[:,-1].astype(&#39;int32&#39;)):
+        bbox_int = bbox.astype(np.int32)
+        left_top = (bbox_int[0], bbox_int[1])
+        right_bottom = (bbox_int[2], bbox_int[3])
+        color = COLORS_81[label%80 + 1].tolist()
+        cv2.rectangle(img, left_top, right_bottom, color, thickness)
+        label_text = class_names[label] if class_names is not None else f&#39;cls {label}&#39;
+
+        if len(bbox) &gt; 4:
+            label_text += f&#39;:{bbox[-1]:.02f}&#39;
+
+        text_w, text_h = cv2.getTextSize(label_text, font, font_scale, thickness)[0]
+        cv2.rectangle(img, left_top, (bbox_int[0] + text_w, bbox_int[1] + text_h + 5), color, -1)
+        cv2.putText(img, label_text, (bbox_int[0], bbox_int[1] + 15),
+                    font, font_scale, (255, 255, 255), thickness, cv2.LINE_AA)
+
+    if show:
+        imshow(img, win_name, wait_time)
+    if out_file is not None:
+        cv2.imwrite(out_file, img)
     return img</code></pre>
 </details>
 </section>
@@ -281,6 +338,100 @@ def imshow_bboxes_colors(img,
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="ascend.post_process.image.draw_bboxes"><code class="name flex">
+<span>def <span class="ident">draw_bboxes</span></span>(<span>img, bboxes, class_names, thickness=1, font_scale=0.5, show=True, win_name='', wait_time=0, out_file=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Draw bboxes and class labels (with scores) on an image with colors.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>img</code></strong> :&ensp;<code>AscendArray, ndarray</code></dt>
+<dd>The image to be displayed.</dd>
+<dt><strong><code>bboxes</code></strong> :&ensp;<code>ndarray</code></dt>
+<dd>Bounding boxes (with scores, label), shaped (n, 5) or (n, 6).
+shape like [x1, y1, x2, y2, scores, classid] or [x1, y1, x2, y2, classid]</dd>
+<dt><strong><code>class_names</code></strong> :&ensp;<code>list[str]</code></dt>
+<dd>Names of each classes.</dd>
+<dt><strong><code>thickness</code></strong> :&ensp;<code>int</code></dt>
+<dd>Thickness of lines.</dd>
+<dt><strong><code>font_scale</code></strong> :&ensp;<code>float</code></dt>
+<dd>Font scales of texts.</dd>
+<dt><strong><code>show</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Whether to show the image.</dd>
+<dt><strong><code>win_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The window name.</dd>
+<dt><strong><code>wait_time</code></strong> :&ensp;<code>int</code></dt>
+<dd>Value of waitKey param.</dd>
+<dt><strong><code>out_file</code></strong> :&ensp;<code>str</code> or <code>None</code></dt>
+<dd>The filename to write the image.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>ndarray</code></dt>
+<dd>The image with bboxes drawn on it.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L239-L293" class="git-link">Browse git</a>
+</summary>
+<pre><code class="python">def draw_bboxes(img,
+                bboxes,
+                class_names,
+                thickness=1,
+                font_scale=0.5,
+                show=True,
+                win_name=&#39;&#39;,
+                wait_time=0,
+                out_file=None):
+    &#34;&#34;&#34;Draw bboxes and class labels (with scores) on an image with colors.
+
+    Args:
+        img (AscendArray, ndarray): The image to be displayed.
+        bboxes (ndarray): Bounding boxes (with scores, label), shaped (n, 5) or (n, 6).
+            shape like [x1, y1, x2, y2, scores, classid] or [x1, y1, x2, y2, classid]
+
+        class_names (list[str]): Names of each classes.
+        thickness (int): Thickness of lines.
+        font_scale (float): Font scales of texts.
+        show (bool): Whether to show the image.
+        win_name (str): The window name.
+        wait_time (int): Value of waitKey param.
+        out_file (str or None): The filename to write the image.
+
+    Returns:
+        ndarray: The image with bboxes drawn on it.
+    &#34;&#34;&#34;
+    assert bboxes.ndim == 2
+    assert bboxes.shape[1] == 5 or bboxes.shape[1] == 6
+    img = trans_numpy(img)
+
+    img = np.ascontiguousarray(img).astype(np.uint8)  # 可能传入的不是uint8
+    font = cv2.FONT_HERSHEY_DUPLEX
+
+    for bbox, label in zip(bboxes[:,:5], bboxes[:,-1].astype(&#39;int32&#39;)):
+        bbox_int = bbox.astype(np.int32)
+        left_top = (bbox_int[0], bbox_int[1])
+        right_bottom = (bbox_int[2], bbox_int[3])
+        color = COLORS_81[label%80 + 1].tolist()
+        cv2.rectangle(img, left_top, right_bottom, color, thickness)
+        label_text = class_names[label] if class_names is not None else f&#39;cls {label}&#39;
+
+        if len(bbox) &gt; 4:
+            label_text += f&#39;:{bbox[-1]:.02f}&#39;
+
+        text_w, text_h = cv2.getTextSize(label_text, font, font_scale, thickness)[0]
+        cv2.rectangle(img, left_top, (bbox_int[0] + text_w, bbox_int[1] + text_h + 5), color, -1)
+        cv2.putText(img, label_text, (bbox_int[0], bbox_int[1] + 15),
+                    font, font_scale, (255, 255, 255), thickness, cv2.LINE_AA)
+
+    if show:
+        imshow(img, win_name, wait_time)
+    if out_file is not None:
+        cv2.imwrite(out_file, img)
+    return img</code></pre>
+</details>
+</dd>
 <dt id="ascend.post_process.image.imshow"><code class="name flex">
 <span>def <span class="ident">imshow</span></span>(<span>img, win_name='', wait_time=0)</span>
 </code></dt>
@@ -298,7 +449,7 @@ def imshow_bboxes_colors(img,
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L28-L48" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L28-L48" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imshow(img, win_name=&#39;&#39;, wait_time=0):
     &#34;&#34;&#34;Show an image.
@@ -357,7 +508,7 @@ def imshow_bboxes_colors(img,
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L51-L101" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L51-L101" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imshow_bboxes(img,
                   bboxes,
@@ -449,7 +600,7 @@ shape like [x1, y1, x2, y2, scores, classid] or [x1, y1, x2, y2, classid]</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L176-L236" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L176-L236" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imshow_bboxes_colors(img,
                    bboxes,
@@ -559,7 +710,7 @@ Defaults to 'green'.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L104-L173" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L104-L173" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def imshow_det_bboxes(img,
                       bboxes,
@@ -651,7 +802,7 @@ Defaults to 'green'.</dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/image.py#L8-L26" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/image.py#L8-L26" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def trans_numpy(img):
     &#34;&#34;&#34;Trans AscendArray img to np.ndrray with rgb/bgr format.
@@ -701,6 +852,7 @@ data-gaCategoryParameter="ascend.post_process.image">
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="ascend.post_process.image.draw_bboxes" href="#ascend.post_process.image.draw_bboxes">draw_bboxes</a></code></li>
 <li><code><a title="ascend.post_process.image.imshow" href="#ascend.post_process.image.imshow">imshow</a></code></li>
 <li><code><a title="ascend.post_process.image.imshow_bboxes" href="#ascend.post_process.image.imshow_bboxes">imshow_bboxes</a></code></li>
 <li><code><a title="ascend.post_process.image.imshow_bboxes_colors" href="#ascend.post_process.image.imshow_bboxes_colors">imshow_bboxes_colors</a></code></li>

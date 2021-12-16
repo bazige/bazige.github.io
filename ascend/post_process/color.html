@@ -34,7 +34,7 @@ body.gsc-overflow-hidden #sidebar {overflow: visible;}
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/color.py#L0-L66" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/color.py#L0-L89" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python"># Copyright (c) Open-MMLab. All rights reserved.
 from enum import Enum
@@ -102,7 +102,29 @@ def color_gen(class_num):
     for _ in range(class_num):
         color = np.random.randint(0, 255, size=3).tolist()
         gen_color.append(color)
-    return gen_color</code></pre>
+    return gen_color
+
+
+&#34;&#34;&#34;An array that defines common colors.
+
+Contains various standard color.
+&#34;&#34;&#34;
+COLORS_81 = np.array([[0, 0, 0], [244, 67, 54], [233, 30, 99], [156, 39, 176], [103, 58, 183], [100, 30, 60],
+            [63, 81, 181], [33, 150, 243], [3, 169, 244], [0, 188, 212], [20, 55, 200],
+            [0, 150, 136], [76, 175, 80], [139, 195, 74], [205, 220, 57], [70, 25, 100],
+            [255, 235, 59], [255, 193, 7], [255, 152, 0], [255, 87, 34], [90, 155, 50],
+            [121, 85, 72], [158, 158, 158], [96, 125, 139], [15, 67, 34], [98, 55, 20],
+            [21, 82, 172], [58, 128, 255], [196, 125, 39], [75, 27, 134], [90, 125, 120],
+            [121, 82, 7], [158, 58, 8], [96, 25, 9], [115, 7, 234], [8, 155, 220],
+            [221, 25, 72], [188, 58, 158], [56, 175, 19], [215, 67, 64], [198, 75, 20],
+            [62, 185, 22], [108, 70, 58], [160, 225, 39], [95, 60, 144], [78, 155, 120],
+            [101, 25, 142], [48, 198, 28], [96, 225, 200], [150, 167, 134], [18, 185, 90],
+            [21, 145, 172], [98, 68, 78], [196, 105, 19], [215, 67, 84], [130, 115, 170],
+            [255, 0, 255], [255, 255, 0], [196, 185, 10], [95, 167, 234], [18, 25, 190],
+            [0, 255, 255], [255, 0, 0], [0, 255, 0], [0, 0, 255], [155, 0, 0],
+            [0, 155, 0], [0, 0, 155], [46, 22, 130], [255, 0, 155], [155, 0, 255],
+            [255, 155, 0], [155, 255, 0], [0, 155, 255], [0, 255, 155], [18, 5, 40],
+            [120, 120, 255], [255, 58, 30], [60, 45, 60], [75, 27, 244], [128, 25, 70]], dtype=&#39;uint8&#39;)</code></pre>
 </details>
 </section>
 <section>
@@ -130,7 +152,7 @@ def color_gen(class_num):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/color.py#L53-L67" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/color.py#L53-L67" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def color_gen(class_num):
     &#34;&#34;&#34;Convert various input to color tuples.
@@ -164,7 +186,7 @@ def color_gen(class_num):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/color.py#L24-L51" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/color.py#L24-L51" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def color_val(color):
     &#34;&#34;&#34;Convert various input to color tuples.
@@ -211,7 +233,7 @@ def color_gen(class_num):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/post_process/color.py#L9-L21" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/post_process/color.py#L9-L21" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Color(Enum):
     &#34;&#34;&#34;An enum that defines common colors.
