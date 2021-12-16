@@ -46,7 +46,7 @@ limitations under the License.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L0-L458" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L0-L459" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
@@ -165,13 +165,14 @@ class Vdec():
                 Log(WARNING, f&#39;buffer queue {self.image.queue()} is almost full.&#39;)
 
             ret = acl.media.dvpp_get_pic_desc_ret_code(output_pic_desc)
+            size = acl.media.dvpp_get_pic_desc_size(output_pic_desc)
+            buffer = acl.media.dvpp_get_pic_desc_data(output_pic_desc)
+            align_w = acl.media.dvpp_get_pic_desc_width_stride(output_pic_desc)
             if ret != ACL_SUCCESS:
+                if buffer:
+                    acl.media.dvpp_free(buffer)
                 Log(WARNING, f&#39;image decode error, return {ret}.&#39;)
             else:
-                size = acl.media.dvpp_get_pic_desc_size(output_pic_desc)
-                buffer = acl.media.dvpp_get_pic_desc_data(output_pic_desc)
-                align_w = acl.media.dvpp_get_pic_desc_width_stride(output_pic_desc)
-
                 frame_id = user_data[0]
                 yuv_image = AscendArray((align_w,), np.dtype(&#39;uint8&#39;), size=size, buffer=buffer,\
                                          format=self._format, flag=&#39;DEVICE&#39;)
@@ -526,7 +527,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L29-L422" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L29-L423" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">class Vdec():
     def __init__(self, 
@@ -617,13 +618,14 @@ if __name__ == &#34;__main__&#34;:
                 Log(WARNING, f&#39;buffer queue {self.image.queue()} is almost full.&#39;)
 
             ret = acl.media.dvpp_get_pic_desc_ret_code(output_pic_desc)
+            size = acl.media.dvpp_get_pic_desc_size(output_pic_desc)
+            buffer = acl.media.dvpp_get_pic_desc_data(output_pic_desc)
+            align_w = acl.media.dvpp_get_pic_desc_width_stride(output_pic_desc)
             if ret != ACL_SUCCESS:
+                if buffer:
+                    acl.media.dvpp_free(buffer)
                 Log(WARNING, f&#39;image decode error, return {ret}.&#39;)
             else:
-                size = acl.media.dvpp_get_pic_desc_size(output_pic_desc)
-                buffer = acl.media.dvpp_get_pic_desc_data(output_pic_desc)
-                align_w = acl.media.dvpp_get_pic_desc_width_stride(output_pic_desc)
-
                 frame_id = user_data[0]
                 yuv_image = AscendArray((align_w,), np.dtype(&#39;uint8&#39;), size=size, buffer=buffer,\
                                          format=self._format, flag=&#39;DEVICE&#39;)
@@ -931,7 +933,7 @@ if __name__ == &#34;__main__&#34;:
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L375-L378" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L376-L379" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def bit_depth(self):
@@ -945,7 +947,7 @@ def bit_depth(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L296-L298" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L297-L299" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def channel_id(self):
@@ -958,7 +960,7 @@ def channel_id(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L315-L317" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L316-L318" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def encoder_type(self):
@@ -971,7 +973,7 @@ def encoder_type(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L356-L360" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L357-L361" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def out_mode(self):
@@ -986,7 +988,7 @@ def out_mode(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L335-L337" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L336-L338" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def pic_format(self):
@@ -999,7 +1001,7 @@ def pic_format(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L285-L287" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L286-L288" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def queue_size(self):
@@ -1012,7 +1014,7 @@ def queue_size(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L351-L354" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L352-L355" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">@property
 def ref_num(self):
@@ -1035,7 +1037,7 @@ def ref_num(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L272-L282" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L273-L283" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def finish(self):
     &#34;&#34;&#34; finish bind thread working. 
@@ -1062,7 +1064,7 @@ def ref_num(self):
 <details class="source">
 <summary>
 <span>Expand source code</span>
-<a href="https://github.com/pdoc3/pdoc/blob/d4d623882bf223e5ecbb16a1b1749fbccda6fe2c/ascend/video/vdec.py#L240-L270" class="git-link">Browse git</a>
+<a href="https://github.com/pdoc3/pdoc/blob/0bc3329127e1fd617312650c6d0f77766d89a41d/ascend/video/vdec.py#L241-L271" class="git-link">Browse git</a>
 </summary>
 <pre><code class="python">def process(self, frame):
     &#34;&#34;&#34;Read one packet frame from caputure in host and send to dvpp.
