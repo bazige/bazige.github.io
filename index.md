@@ -1,4 +1,4 @@
-# Ascendfly
+![](./ascend/logo/ascendfly.png)
 
 ## 1 简介
 
@@ -51,7 +51,7 @@ Ascendfly系统级封装主要包括以下模块（module）。
 
 整体系统设计如下图所示：
 
-![输入图片说明](./ascend/logo/ascendfly_graph.png)
+![](./ascend/logo/ascendfly_graph.png)
 
 
 
@@ -167,7 +167,7 @@ python3.7.5 yolov3_caffe_demo.py
 
 ### 4.2 pyav手动安装
 pyav自动安装失败，缺少`libavformat`、`libavcodec`等依赖的`ERROR`错误时，可参考如下步骤手动安装**pyav**。
-![输入图片说明](./ascend/logo/ascendfly_error1.png)
+![](./ascend/logo/ascendfly_error1.png)
 
 - **步骤 1** 安装`libavformat`、`libavcodec`、`libavdevice`、`libavutil`、`libavfilter`、`libswscale`、`libswresample`：
    
@@ -178,9 +178,9 @@ pyav自动安装失败，缺少`libavformat`、`libavcodec`等依赖的`ERROR`�
       libavutil-dev libswscale-dev libavresample-dev
    ```
    如果使用`pip3 install av`可以成功，**后续步骤跳过**。如果出现以下错误，则说明pip3尝试安装的`ffmpeg版本<4.x`的。
-   ![输入图片说明](./ascend/logo/ascendfly_error2.png)
+   ![](./ascend/logo/ascendfly_error2.png)
    或
-   ![输入图片说明](./ascend/logo/ascendfly_error3.png)
+   ![](./ascend/logo/ascendfly_error3.png)
    
    以上错误这说明`libavcodec-dev`等包的版本太低, 所以需要安装`ffmpeg`以及更新其他依赖来解决这个问题，可以参考issue：[Rob Savouy's PPA](https://github.com/aiortc/aiortc/issues/326)和[Docker install of aiortc](https://github.com/aiortc/aiortc/issues/327), 或者参考后续步骤。
    
@@ -204,7 +204,7 @@ pyav自动安装失败，缺少`libavformat`、`libavcodec`等依赖的`ERROR`�
       vim /etc/apt/sources.list
       ```
    
-      ![输入图片说明](./ascend/logo/ascendfly_sourcelist.png)
+      ![](./ascend/logo/ascendfly_sourcelist.png)
    
    2. **方法2**：命令方式
    
@@ -215,7 +215,7 @@ pyav自动安装失败，缺少`libavformat`、`libavcodec`等依赖的`ERROR`�
    
    如果`apt-get update`出现以下错误，
    
-   ![输入图片说明](./ascend/logo/ascendfly_error4.png)
+   ![](./ascend/logo/ascendfly_error4.png)
    
    解决方法是：
    
@@ -236,7 +236,7 @@ pyav自动安装失败，缺少`libavformat`、`libavcodec`等依赖的`ERROR`�
    apt-cache madison libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev
    ```
    此时`ffmpeg`以及`libavformat`已经有**4.x**的版本
-   ![输入图片说明](./ascend/logo/ascendfly_version1.png)
+   ![](./ascend/logo/ascendfly_version1.png)
    
 - **步骤 5** 安装和更新libavformat等依赖：
    
@@ -249,4 +249,4 @@ pyav自动安装失败，缺少`libavformat`、`libavcodec`等依赖的`ERROR`�
    ```shell
    pip3 install av
    ```
-   ![输入图片说明](./ascend/logo/ascendfly_install_av.png)
+   ![](./ascend/logo/ascendfly_install_av.png)
